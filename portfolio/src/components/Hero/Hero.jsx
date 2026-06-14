@@ -4,7 +4,7 @@ import { FileText, Mail, ChevronDown } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { SiTryhackme } from "react-icons/si";
 import ProfileImage from "./ProfileImage";
-import { TerminalCard } from "../common";
+import { TerminalCard, TiltWrapper } from "../common";
 import { profileData } from "../../data/profileData";
 import { slideLeft } from "../../animations/slideLeft";
 import { slideRight } from "../../animations/slideRight";
@@ -54,7 +54,7 @@ const Hero = () => {
               variants={slideLeft}
               initial="hidden"
               animate="visible"
-              className="text-[#00FF9D] font-mono text-sm mb-3 tracking-widest uppercase"
+              className="text-[#1E6F44] font-mono text-sm mb-3 tracking-widest uppercase font-bold"
             >
               Hello, I'm
             </motion.p>
@@ -65,7 +65,7 @@ const Hero = () => {
               initial="hidden"
               animate="visible"
               transition={{ delay: 0.1 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold font-poppins text-white leading-[1.1] mb-4"
+              className="text-5xl md:text-6xl lg:text-7xl font-bold font-poppins text-[#181A1B] leading-[1.1] mb-4"
             >
               {profileData.name}
             </motion.h1>
@@ -78,9 +78,9 @@ const Hero = () => {
               transition={{ delay: 0.2 }}
               className="flex items-center gap-2 mb-4"
             >
-              <span className="text-[#00FF9D] font-mono text-sm select-none">›</span>
-              <span className="text-xl md:text-2xl font-semibold font-mono"
-                style={{ color: "#4CC9F0" }}>
+              <span className="text-[#1E6F44] font-mono text-sm select-none font-bold">›</span>
+              <span className="text-xl md:text-2xl font-bold font-mono"
+                style={{ color: "#2B6282" }}>
                 <TypeAnimation
                   sequence={buildTypingSequence(profileData.typingRoles)}
                   wrapper="span"
@@ -97,7 +97,7 @@ const Hero = () => {
               initial="hidden"
               animate="visible"
               transition={{ delay: 0.3 }}
-              className="text-gray-400 text-base md:text-lg leading-relaxed mb-8 max-w-md"
+              className="text-[#5C615D] text-base md:text-lg leading-relaxed mb-8 max-w-md"
             >
               {profileData.tagline}
             </motion.p>
@@ -114,9 +114,9 @@ const Hero = () => {
                 href={profileData.resumeLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05, boxShadow: "0 0 24px rgba(0,255,157,0.4)" }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#00FF9D] to-[#4CC9F0] text-[#0B1020] font-semibold text-sm transition-all duration-300"
+                className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#181A1B] text-[#F6F5F0] font-bold text-sm hover:bg-[#1E6F44] hover:shadow-[3px_3px_0px_#181A1B] transition-all duration-300"
               >
                 <FileText size={16} />
                 Resume
@@ -128,7 +128,7 @@ const Hero = () => {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 border border-white/15 text-gray-300 hover:text-white hover:border-white/30 font-medium text-sm transition-all duration-300"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#EFECE3] border border-[#181A1B]/15 text-[#5C615D] hover:text-[#181A1B] hover:border-[#181A1B] hover:shadow-[2px_2px_0px_#181A1B] font-semibold text-sm transition-all duration-300"
               >
                 <FaGithub size={16} />
                 GitHub
@@ -140,7 +140,7 @@ const Hero = () => {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 border border-white/15 text-gray-300 hover:text-[#4CC9F0] hover:border-[#4CC9F0]/30 font-medium text-sm transition-all duration-300"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#EFECE3] border border-[#181A1B]/15 text-[#5C615D] hover:text-[#2B6282] hover:border-[#2B6282] hover:shadow-[2px_2px_0px_#181A1B] font-semibold text-sm transition-all duration-300"
               >
                 <FaLinkedin size={16} />
                 LinkedIn
@@ -152,7 +152,7 @@ const Hero = () => {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 border border-white/15 text-gray-300 hover:text-[#00FF9D] hover:border-[#00FF9D]/30 font-medium text-sm transition-all duration-300"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#EFECE3] border border-[#181A1B]/15 text-[#5C615D] hover:text-[#1E6F44] hover:border-[#1E6F44] hover:shadow-[2px_2px_0px_#181A1B] font-semibold text-sm transition-all duration-300"
               >
                 <SiTryhackme size={15} />
                 TryHackMe
@@ -162,7 +162,7 @@ const Hero = () => {
                 href={`mailto:${profileData.email}`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 border border-white/15 text-gray-300 hover:text-white hover:border-white/30 font-medium text-sm transition-all duration-300"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#EFECE3] border border-[#181A1B]/15 text-[#5C615D] hover:text-[#181A1B] hover:border-[#181A1B] hover:shadow-[2px_2px_0px_#181A1B] font-semibold text-sm transition-all duration-300"
               >
                 <Mail size={16} />
                 Email
@@ -177,10 +177,12 @@ const Hero = () => {
               transition={{ delay: 0.55 }}
               className="max-w-sm"
             >
-              <TerminalCard
-                title="aryan@portfolio ~ "
-                lines={heroTerminalLines}
-              />
+              <TiltWrapper maxRotation={10}>
+                <TerminalCard
+                  title="aryan@portfolio ~ "
+                  lines={heroTerminalLines}
+                />
+              </TiltWrapper>
             </motion.div>
           </div>
 
@@ -203,7 +205,7 @@ const Hero = () => {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.4, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-gray-500 hover:text-[#00FF9D] transition-colors duration-300 group"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-gray-500 hover:text-[#1E6F44] transition-colors duration-300 group"
         aria-label="Scroll to about"
       >
         <span className="text-xs font-mono tracking-widest uppercase">scroll</span>

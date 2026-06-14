@@ -13,7 +13,7 @@ const Achievements = () => {
       <div
         className="absolute top-0 right-0 w-96 h-96 pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(76,201,240,0.04) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(43,98,130,0.03) 0%, transparent 70%)",
           filter: "blur(80px)",
         }}
       />
@@ -22,7 +22,7 @@ const Achievements = () => {
         <SectionHeading
           title="Achievements"
           subtitle="Milestones & Recognition"
-          accent="#00FF9D"
+          accent="#1E6F44"
         />
 
         <motion.div

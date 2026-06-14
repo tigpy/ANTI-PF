@@ -1,60 +1,67 @@
-// Shared Tailwind class strings for glassmorphism
+// Shared Tailwind class strings for Chalk & Charcoal Cybernetics layout
 // Import and spread into className wherever needed
 
 export const glass = {
-  // Base card — used everywhere
+  // Base card — cream/sand textured panel with thin organic charcoal border
   card: [
-    "bg-[rgba(19,27,46,0.55)]",
-    "backdrop-blur-xl",
+    "bg-[#EFECE3]/80",
+    "backdrop-blur-md",
     "border",
-    "border-white/10",
+    "border-[#181A1B]/12",
     "rounded-2xl",
-    "shadow-[0_10px_40px_rgba(0,0,0,0.25)]",
+    "shadow-[3px_3px_0px_rgba(24,26,27,0.05)]",
+    "transition-all",
+    "duration-300",
   ].join(" "),
 
-  // Project cards get a slightly larger radius
+  // Project cards with custom shape and solid border
   projectCard: [
-    "bg-[rgba(19,27,46,0.55)]",
-    "backdrop-blur-xl",
-    "border",
-    "border-white/10",
+    "bg-[#EFECE3]/80",
+    "backdrop-blur-md",
+    "border-2",
+    "border-[#181A1B]/15",
     "rounded-3xl",
-    "shadow-[0_10px_40px_rgba(0,0,0,0.25)]",
+    "shadow-[4px_4px_0px_rgba(24,26,27,0.06)]",
+    "transition-all",
+    "duration-300",
   ].join(" "),
 
-  // Hover state applied via Framer Motion or Tailwind group
+  // Hover state: sharp black/charcoal solid offset shadow and green border
   cardHover: [
-    "hover:border-[#00FF9D]",
-    "hover:shadow-[0_0_25px_rgba(0,255,157,0.3)]",
+    "hover:border-[#1E6F44]",
+    "hover:shadow-[4px_4px_0px_rgba(24,26,27,0.9)]",
+    "hover:-translate-y-0.5",
   ].join(" "),
 
-  // Navbar — more transparent
+  // Navbar — semi-transparent warm ivory cream
   navbar: [
-    "bg-[rgba(11,16,32,0.8)]",
-    "backdrop-blur-xl",
+    "bg-[#F6F5F0]/92",
+    "backdrop-blur-md",
     "border-b",
-    "border-white/10",
+    "border-[#181A1B]/10",
   ].join(" "),
 
-  // Terminal window card
+  // Terminal window card: tactile CRT terminal casing with heavy borders
   terminal: [
-    "bg-[rgba(11,16,32,0.9)]",
-    "backdrop-blur-xl",
-    "border",
-    "border-white/10",
+    "bg-[#EFECE3]",
+    "border-2",
+    "border-[#181A1B]",
     "rounded-2xl",
+    "shadow-[4px_4px_0px_rgba(24,26,27,0.9)]",
+    "scanlines",
   ].join(" "),
 
-  // Input fields
+  // Input fields for forms
   input: [
-    "bg-[rgba(19,27,46,0.55)]",
-    "backdrop-blur-sm",
-    "border",
-    "border-white/10",
+    "bg-[#FAF9F6]",
+    "border-2",
+    "border-[#181A1B]/15",
     "rounded-xl",
-    "focus:border-[#00FF9D]",
+    "text-[#181A1B]",
+    "placeholder-[#8C908D]",
+    "focus:border-[#1E6F44]",
     "focus:ring-1",
-    "focus:ring-[#00FF9D]",
+    "focus:ring-[#1E6F44]",
     "focus:outline-none",
     "transition-all",
     "duration-300",

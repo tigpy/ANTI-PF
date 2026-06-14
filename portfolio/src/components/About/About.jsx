@@ -17,7 +17,7 @@ const About = () => {
       <div
         className="absolute top-1/2 left-0 w-72 h-72 rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(76,201,240,0.05) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(43,98,130,0.04) 0%, transparent 70%)",
           filter: "blur(60px)",
           transform: "translateY(-50%)",
         }}
@@ -27,7 +27,7 @@ const About = () => {
         <SectionHeading
           title="About Me"
           subtitle="Who I Am"
-          accent="#00FF9D"
+          accent="#1E6F44"
         />
 
         <div ref={ref} className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -41,12 +41,12 @@ const About = () => {
             {/* Decorative quote mark */}
             <div
               className="text-6xl font-bold font-poppins leading-none mb-1 select-none"
-              style={{ color: "rgba(0,255,157,0.12)" }}
+              style={{ color: "rgba(30,111,68,0.12)" }}
             >
               "
             </div>
 
-            <p className="text-gray-300 text-base md:text-lg leading-[1.9] mb-8">
+            <p className="text-[#5C615D] text-base md:text-lg leading-[1.9] mb-8">
               {profileData.summary}
             </p>
 
@@ -60,11 +60,11 @@ const About = () => {
               ].map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1.5 rounded-full text-xs font-medium font-mono"
+                  className="px-3 py-1.5 rounded-full text-xs font-bold font-mono"
                   style={{
-                    background: "rgba(0,255,157,0.06)",
-                    border: "1px solid rgba(0,255,157,0.18)",
-                    color: "#00FF9D",
+                    background: "rgba(30,111,68,0.06)",
+                    border: "1px solid rgba(30,111,68,0.18)",
+                    color: "#1E6F44",
                   }}
                 >
                   {tag}
@@ -73,17 +73,17 @@ const About = () => {
             </div>
 
             {/* Quick stats */}
-            <div className="mt-10 pt-8 border-t border-white/8 grid grid-cols-3 gap-6">
+            <div className="mt-10 pt-8 border-t border-[#181A1B]/10 grid grid-cols-3 gap-6">
               {[
                 { value: "3+",   label: "Projects Built" },
                 { value: "50+",  label: "THM Rooms" },
                 { value: "2026", label: "Graduated" },
               ].map(({ value, label }) => (
                 <div key={label} className="text-center">
-                  <p className="text-2xl font-bold font-poppins" style={{ color: "#00FF9D" }}>
+                  <p className="text-2xl font-bold font-poppins" style={{ color: "#1E6F44" }}>
                     {value}
                   </p>
-                  <p className="text-gray-500 text-xs mt-1">{label}</p>
+                  <p className="text-[#8C908D] text-xs mt-1 font-semibold">{label}</p>
                 </div>
               ))}
             </div>
@@ -97,16 +97,16 @@ const About = () => {
             className="flex flex-col gap-4"
           >
             {/* Education */}
-            <AboutCard icon={GraduationCap} title="Education" accent="#00FF9D">
-              <p className="font-semibold text-white text-base leading-snug mb-1">
+            <AboutCard icon={GraduationCap} title="Education" accent="#1E6F44">
+              <p className="font-bold text-[#181A1B] text-base leading-snug mb-1">
                 {profileData.education.degree}
               </p>
-              <p className="text-gray-400 text-sm">{profileData.education.college}</p>
-              <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/8">
-                <span className="text-gray-500 text-xs">{profileData.education.year}</span>
+              <p className="text-[#5C615D] text-sm">{profileData.education.college}</p>
+              <div className="flex items-center justify-between mt-3 pt-3 border-t border-[#181A1B]/10">
+                <span className="text-[#8C908D] text-xs font-semibold">{profileData.education.year}</span>
                 <span
-                  className="text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full"
-                  style={{ background: "rgba(0,255,157,0.1)", color: "#00FF9D" }}
+                  className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full"
+                  style={{ background: "rgba(30,111,68,0.08)", color: "#1E6F44" }}
                 >
                   CGPA {profileData.education.cgpa}
                 </span>
@@ -114,21 +114,21 @@ const About = () => {
             </AboutCard>
 
             {/* Location */}
-            <AboutCard icon={MapPin} title="Location" accent="#4CC9F0">
-              <p className="font-semibold text-white text-base">{profileData.location}</p>
-              <p className="text-gray-500 text-xs mt-1">India (IST — UTC+5:30)</p>
-              <p className="text-gray-400 text-sm mt-3 leading-relaxed">
+            <AboutCard icon={MapPin} title="Location" accent="#2B6282">
+              <p className="font-bold text-[#181A1B] text-base">{profileData.location}</p>
+              <p className="text-[#8C908D] text-xs font-semibold mt-1">India (IST — UTC+5:30)</p>
+              <p className="text-[#5C615D] text-sm mt-3 leading-relaxed">
                 Open to remote roles and on-site opportunities in Mumbai.
               </p>
             </AboutCard>
 
             {/* Interests */}
-            <AboutCard icon={Zap} title="Interests" accent="#00FF9D">
+            <AboutCard icon={Zap} title="Interests" accent="#1E6F44">
               <div className="grid grid-cols-2 gap-y-2 gap-x-4">
                 {profileData.interests.map((interest) => (
                   <div key={interest} className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "#00FF9D" }} />
-                    <span className="text-gray-300 text-sm">{interest}</span>
+                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "#1E6F44" }} />
+                    <span className="text-[#181A1B] font-semibold text-sm">{interest}</span>
                   </div>
                 ))}
               </div>

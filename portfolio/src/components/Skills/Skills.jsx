@@ -6,7 +6,6 @@ import SkillTab from "./SkillTab";
 import SkillBar from "./SkillBar";
 import { SectionHeading, Container, Badge } from "../common";
 import { skillsData } from "../../data/skillsData";
-import { staggerContainer, staggerItem } from "../../animations/staggerCards";
 import { fadeUp } from "../../animations/fadeUp";
 
 const TAB_ICONS = {
@@ -27,13 +26,12 @@ const Skills = () => {
     <section
       id="skills"
       className="py-20 relative overflow-hidden"
-      // bg handled globally
     >
       {/* Background accent */}
       <div
         className="absolute top-0 right-0 w-96 h-96 rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(0,255,157,0.04) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(30,111,68,0.03) 0%, transparent 70%)",
           filter: "blur(80px)",
         }}
       />
@@ -42,7 +40,7 @@ const Skills = () => {
         <SectionHeading
           title="Skills & Technologies"
           subtitle="What I Work With"
-          accent="#00FF9D"
+          accent="#1E6F44"
         />
 
         <div ref={ref}>
@@ -74,35 +72,35 @@ const Skills = () => {
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
               <div
-                className="rounded-3xl p-8 md:p-10 border border-white/10"
+                className="rounded-3xl p-8 md:p-10 border-2 border-[#181A1B]/15"
                 style={{
-                  background: "rgba(19,27,46,0.55)",
+                  background: "rgba(239, 236, 227, 0.7)",
                   backdropFilter: "blur(20px)",
-                  boxShadow: "0 10px 40px rgba(0,0,0,0.25)",
+                  boxShadow: "4px 4px 0px #181A1B",
                 }}
               >
                 {/* Panel header */}
-                <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/8">
+                <div className="flex items-center justify-between mb-8 pb-6 border-b border-[#181A1B]/10">
                   <div className="flex items-center gap-3">
                     {TAB_ICONS[activeTab] && (
                       <div
                         className="w-10 h-10 rounded-xl flex items-center justify-center"
                         style={{
-                          background: "rgba(0,255,157,0.1)",
-                          border: "1px solid rgba(0,255,157,0.2)",
+                          background: "rgba(30,111,68,0.08)",
+                          border: "1px solid rgba(30,111,68,0.25)",
                         }}
                       >
                         {(() => {
                           const Icon = TAB_ICONS[activeTab];
-                          return <Icon size={18} color="#00FF9D" />;
+                          return <Icon size={18} color="#1E6F44" />;
                         })()}
                       </div>
                     )}
                     <div>
-                      <h3 className="text-white font-semibold font-poppins">
+                      <h3 className="text-[#181A1B] font-bold font-poppins text-lg">
                         {activeTab}
                       </h3>
-                      <p className="text-gray-500 text-xs mt-0.5">
+                      <p className="text-[#8C908D] text-xs mt-0.5 font-semibold">
                         {activeCategory?.skills.length} skills
                       </p>
                     </div>
@@ -118,7 +116,7 @@ const Skills = () => {
                   </div>
                 </div>
 
-                {/* Skill bars grid — no stagger wrapper so bars animate instantly on tab switch */}
+                {/* Skill bars grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
                   {activeCategory?.skills.map(({ name, level }) => (
                     <SkillBar key={name} name={name} level={level} />
@@ -126,7 +124,7 @@ const Skills = () => {
                 </div>
 
                 {/* Mobile badge pills */}
-                <div className="md:hidden mt-8 pt-6 border-t border-white/8 flex flex-wrap gap-2">
+                <div className="md:hidden mt-8 pt-6 border-t border-[#181A1B]/10 flex flex-wrap gap-2">
                   {activeCategory?.skills.map(({ name }) => (
                     <Badge key={name} variant="default" size="sm">
                       {name}

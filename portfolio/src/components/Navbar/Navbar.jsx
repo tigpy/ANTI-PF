@@ -1,14 +1,20 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Terminal, Volume2, VolumeX } from "lucide-react";
 import { NAV_LINKS } from "../../constants";
 import { profileData } from "../../data/profileData";
 import { glass } from "../../styles/glass";
+import DecryptText from "../common/DecryptText";
+import CLIOverlay from "./CLIOverlay";
+import { cyberSynth } from "../../utils/synth";
+import { addSnifferLog } from "../../utils/sniffer";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
+  const [cliOpen, setCliOpen] = useState(false);
+  const [audioEnabled, setAudioEnabled] = useState(cyberSynth.isEnabled());
 
   // Detect scroll to apply glass background
   useEffect(() => {
@@ -41,10 +47,32 @@ const Navbar = () => {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
+  // Backtick toggle key listener for terminal CLI
+  useEffect(() => {
+    const handleBacktick = (e) => {
+      if (e.key === "`") {
+        e.preventDefault();
+        setCliOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleBacktick);
+    return () => window.removeEventListener("keydown", handleBacktick);
+  }, []);
+
   const handleNavClick = (href) => {
     setMobileOpen(false);
     const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (el) {
+      addSnifferLog(`[NAV] SCROLLING TO: ${href}`);
+      cyberSynth.playChime();
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const toggleAudio = () => {
+    const nextState = cyberSynth.toggle();
+    setAudioEnabled(nextState);
+    addSnifferLog(`[SYS] AUDIO TOGGLED: ${nextState ? "ON" : "OFF"}`);
   };
 
   return (
@@ -66,8 +94,8 @@ const Navbar = () => {
             whileTap={{ scale: 0.97 }}
             className="flex items-center gap-3 group"
           >
-            <div className="w-12 h-12 rounded-2xl overflow-hidden border border-[#00FF9D]/40
-                shadow-[0_0_15px_rgba(0,255,157,0.3)]
+            <div className="w-12 h-12 rounded-2xl overflow-hidden border border-[#1E6F44]/30
+                shadow-[2px_2px_0px_#181A1B]
                 flex items-center justify-center">
               <img
                 src="/favicon.jpg"
@@ -75,7 +103,7 @@ const Navbar = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <span className="hidden sm:block text-white font-semibold font-poppins text-sm group-hover:text-[#00FF9D] transition-colors duration-300">
+            <span className="hidden sm:block text-[#181A1B] font-bold font-poppins text-sm group-hover:text-[#1E6F44] transition-colors duration-300">
               {profileData.name}
             </span>
           </motion.a>
@@ -90,18 +118,18 @@ const Navbar = () => {
                   href={link.href}
                   onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
                   whileHover={{ y: -1 }}
-                  className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
+                  className={`relative px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-300 ${
                     isActive
-                      ? "text-[#00FF9D]"
-                      : "text-gray-400 hover:text-white"
+                      ? "text-[#1E6F44]"
+                      : "text-[#5C615D] hover:text-[#181A1B]"
                   }`}
                 >
-                  {link.label}
+                  <DecryptText text={link.label} />
                   {/* Active indicator dot */}
                   {isActive && (
                     <motion.span
                       layoutId="nav-indicator"
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#00FF9D]"
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#1E6F44]"
                     />
                   )}
                 </motion.a>
@@ -109,15 +137,43 @@ const Navbar = () => {
             })}
           </nav>
 
-          {/* Desktop CTA */}
+          {/* Desktop CTA & Controls */}
           <div className="hidden md:flex items-center gap-3">
+            {/* Audio Synth Toggle */}
+            <button
+              onClick={toggleAudio}
+              className={`p-2 rounded-xl border border-[#181A1B] transition-all duration-300 flex items-center gap-1.5 font-mono text-xs font-bold ${
+                audioEnabled
+                  ? "bg-[#1E6F44] text-[#F6F5F0] shadow-[2.5px_2.5px_0px_#181A1B]"
+                  : "bg-[#EFECE3] text-[#181A1B] hover:bg-[#FAF9F6]"
+              }`}
+              title="Toggle Audio Feedback"
+            >
+              {audioEnabled ? <Volume2 size={14} /> : <VolumeX size={14} />}
+              <span>{audioEnabled ? "AUDIO: ON" : "AUDIO: OFF"}</span>
+            </button>
+
+            {/* CLI Console Shell Trigger */}
+            <button
+              onClick={() => setCliOpen(!cliOpen)}
+              className={`p-2 rounded-xl border border-[#181A1B] transition-all duration-300 flex items-center gap-1.5 font-mono text-xs font-bold ${
+                cliOpen
+                  ? "bg-[#2B6282] text-[#F6F5F0] shadow-[2.5px_2.5px_0px_#181A1B]"
+                  : "bg-[#EFECE3] text-[#181A1B] hover:bg-[#FAF9F6]"
+              }`}
+              title="Open Diagnostic Console & CTF Challenge"
+            >
+              <Terminal size={14} />
+              <span>SHELL [CTF]</span>
+            </button>
+
             <motion.a
               href={profileData.resumeLink}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="px-5 py-2 text-sm font-semibold rounded-xl bg-gradient-to-r from-[#00FF9D] to-[#4CC9F0] text-[#0B1020] hover:shadow-[0_0_20px_rgba(0,255,157,0.4)] transition-all duration-300"
+              className="px-5 py-2 text-sm font-bold rounded-xl bg-[#181A1B] text-[#F6F5F0] hover:bg-[#1E6F44] hover:shadow-[3px_3px_0px_rgba(24,26,27,0.3)] transition-all duration-300"
             >
               Resume
             </motion.a>
@@ -127,7 +183,7 @@ const Navbar = () => {
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => setMobileOpen((v) => !v)}
-            className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 text-gray-300 hover:text-white transition-colors"
+            className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-[#EFECE3] border border-[#181A1B]/15 text-[#5C615D] hover:text-[#181A1B] transition-colors"
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
@@ -157,19 +213,19 @@ const Navbar = () => {
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 28, stiffness: 260 }}
               className="fixed top-0 right-0 bottom-0 z-50 w-72 md:hidden flex flex-col"
-              style={{ background: "#0F1628", borderLeft: "1px solid rgba(255,255,255,0.08)" }}
+              style={{ background: "#F6F5F0", borderLeft: "2px solid #181A1B" }}
             >
               {/* Drawer header */}
-              <div className="flex items-center justify-between px-6 py-5 border-b border-white/8">
+              <div className="flex items-center justify-between px-6 py-5 border-b border-[#181A1B]/10">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00FF9D] to-[#4CC9F0] flex items-center justify-center">
-                    <span className="text-[#0B1020] font-bold text-xs font-poppins">AS</span>
+                  <div className="w-8 h-8 rounded-lg bg-[#181A1B] flex items-center justify-center">
+                    <span className="text-[#F6F5F0] font-bold text-xs font-poppins">AS</span>
                   </div>
-                  <span className="text-white font-semibold text-sm font-poppins">Aryan Singh</span>
+                  <span className="text-[#181A1B] font-bold text-sm font-poppins">Aryan Singh</span>
                 </div>
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/5 text-gray-400 hover:text-white transition-colors"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg bg-[#EFECE3] text-[#5C615D] hover:text-[#181A1B] transition-colors"
                 >
                   <X size={16} />
                 </button>
@@ -187,13 +243,13 @@ const Navbar = () => {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.06 }}
                       onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                      className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                      className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all duration-200 ${
                         isActive
-                          ? "bg-[#00FF9D]/10 text-[#00FF9D] border border-[#00FF9D]/20"
-                          : "text-gray-400 hover:bg-white/5 hover:text-white"
+                          ? "bg-[#1E6F44]/10 text-[#1E6F44] border border-[#1E6F44]/20"
+                          : "text-[#5C615D] hover:bg-[#EFECE3] hover:text-[#181A1B]"
                       }`}
                     >
-                      <span className="text-xs font-mono text-[#00FF9D]/40">
+                      <span className="text-xs font-mono text-[#1E6F44]/40">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       {link.label}
@@ -202,13 +258,39 @@ const Navbar = () => {
                 })}
               </nav>
 
+              {/* Mobile controls */}
+              <div className="px-4 py-4 border-t border-[#181A1B]/10 space-y-3">
+                <button
+                  onClick={toggleAudio}
+                  className={`w-full py-2.5 rounded-xl border border-[#181A1B] flex items-center justify-center gap-2 font-mono text-xs font-bold ${
+                    audioEnabled
+                      ? "bg-[#1E6F44] text-[#F6F5F0]"
+                      : "bg-[#EFECE3] text-[#181A1B]"
+                  }`}
+                >
+                  {audioEnabled ? <Volume2 size={14} /> : <VolumeX size={14} />}
+                  <span>{audioEnabled ? "AUDIO: ON" : "AUDIO: OFF"}</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    setMobileOpen(false);
+                    setCliOpen(true);
+                  }}
+                  className="w-full py-2.5 rounded-xl border border-[#181A1B] bg-[#EFECE3] text-[#181A1B] flex items-center justify-center gap-2 font-mono text-xs font-bold hover:bg-[#FAF9F6]"
+                >
+                  <Terminal size={14} />
+                  <span>DIAGNOSTIC SHELL [CTF]</span>
+                </button>
+              </div>
+
               {/* Drawer footer CTA */}
               <div className="px-4 pb-8">
                 <a
                   href={profileData.resumeLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full text-center px-5 py-3 text-sm font-semibold rounded-xl bg-gradient-to-r from-[#00FF9D] to-[#4CC9F0] text-[#0B1020] hover:shadow-[0_0_20px_rgba(0,255,157,0.35)] transition-all duration-300"
+                  className="block w-full text-center px-5 py-3 text-sm font-bold rounded-xl bg-[#181A1B] text-[#F6F5F0] hover:bg-[#1E6F44] hover:shadow-[3px_3px_0px_rgba(24,26,27,0.3)] transition-all duration-300"
                 >
                   Download Resume
                 </a>
@@ -217,8 +299,12 @@ const Navbar = () => {
           </>
         )}
       </AnimatePresence>
+
+      {/* CLIOverlay Component */}
+      <CLIOverlay isOpen={cliOpen} onClose={() => setCliOpen(false)} />
     </>
   );
 };
 
 export default Navbar;
+

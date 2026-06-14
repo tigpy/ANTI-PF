@@ -21,11 +21,11 @@ const Badge = ({
   };
 
   const variantClasses = {
-    default: "bg-white/5 text-gray-300 border border-white/10 hover:bg-[#00FF9D]/10 hover:text-[#00FF9D] hover:border-[#00FF9D]/30",
-    green:   "bg-[#00FF9D]/10 text-[#00FF9D] border border-[#00FF9D]/20",
-    blue:    "bg-[#4CC9F0]/10 text-[#4CC9F0] border border-[#4CC9F0]/20",
-    orange:  "bg-[#FF9900]/10 text-[#FF9900] border border-[#FF9900]/20",
-    outline: "bg-transparent text-gray-400 border border-white/15 hover:border-[#00FF9D]/40",
+    default: "bg-[#EFECE3] text-[#181A1B] border border-[#181A1B]/12 hover:bg-[#1E6F44]/10 hover:text-[#1E6F44] hover:border-[#1E6F44]/30",
+    green:   "bg-[#1E6F44]/10 text-[#1E6F44] border border-[#1E6F44]/20",
+    blue:    "bg-[#2B6282]/10 text-[#2B6282] border border-[#2B6282]/20",
+    orange:  "bg-[#C25E29]/10 text-[#C25E29] border border-[#C25E29]/20",
+    outline: "bg-transparent text-[#5C615D] border border-[#181A1B]/15 hover:border-[#1E6F44]",
   };
 
   return (
