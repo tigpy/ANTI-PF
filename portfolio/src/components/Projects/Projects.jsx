@@ -1,0 +1,105 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import FilterBar from "./FilterBar";
+import ProjectCard from "./ProjectCard";
+import ProjectModal from "./ProjectModal";
+import { SectionHeading, Container } from "../common";
+import { projectsData } from "../../data/projectsData";
+import { staggerContainer } from "../../animations/staggerCards";
+import { fadeUp } from "../../animations/fadeUp";
+
+const Projects = () => {
+  const [activeFilter, setActiveFilter] = useState("All");
+  const [selectedProject, setSelectedProject] = useState(null);
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.05 });
+
+  const filtered =
+    activeFilter === "All"
+      ? projectsData
+      : projectsData.filter((p) => p.category === activeFilter);
+
+  return (
+    <>
+      <section
+        id="projects"
+        className="py-20 relative overflow-hidden"
+        // bg handled globally
+      >
+        {/* Background glow */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
+          style={{
+            background: "radial-gradient(circle, rgba(76,201,240,0.04) 0%, transparent 70%)",
+            filter: "blur(80px)",
+          }}
+        />
+
+        <Container>
+          <SectionHeading
+            title="Projects"
+            subtitle="What I've Built"
+            accent="#00FF9D"
+          />
+
+          <div ref={ref}>
+            {/* Filter bar */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
+            >
+              <FilterBar active={activeFilter} onChange={setActiveFilter} />
+            </motion.div>
+
+            {/* Project count */}
+            <motion.p
+              variants={fadeUp}
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
+              transition={{ delay: 0.1 }}
+              className="text-center text-gray-500 text-sm font-mono mb-8 -mt-6"
+            >
+              Showing{" "}
+              <span style={{ color: "#00FF9D" }}>{filtered.length}</span>{" "}
+              project{filtered.length !== 1 ? "s" : ""}
+              {activeFilter !== "All" && ` in ${activeFilter}`}
+            </motion.p>
+
+            {/* Cards grid */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeFilter}
+                variants={staggerContainer}
+                initial="hidden"
+                animate="visible"
+                exit={{ opacity: 0, y: -10 }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              >
+                {filtered.map((project) => (
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    onOpenModal={setSelectedProject}
+                  />
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </Container>
+      </section>
+
+      {/* Modal — rendered outside section so it overlays everything */}
+      <AnimatePresence>
+        {selectedProject && (
+          <ProjectModal
+            project={selectedProject}
+            onClose={() => setSelectedProject(null)}
+          />
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+export default Projects;
