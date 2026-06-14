@@ -1,16 +1,15 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, CheckCircle, AlertCircle, Loader } from "lucide-react";
-import { glass } from "../../styles/glass";
 
 const ContactForm = () => {
   const formRef = useRef(null);
   const [status, setStatus] = useState("idle"); // idle | sending | success | error
   const [fields, setFields] = useState({ name: "", email: "", subject: "", message: "" });
 
-  const inputClass = `w-full px-4 py-3 rounded-xl text-white text-sm placeholder-gray-500 transition-all duration-300 outline-none
-    bg-[rgba(11,16,32,0.6)] border border-white/10
-    focus:border-[#00FF9D] focus:ring-1 focus:ring-[#00FF9D]/30`;
+  const inputClass = `w-full px-4 py-3 rounded-xl text-[#181A1B] text-sm placeholder-[#8C908D] transition-all duration-300 outline-none font-medium
+    bg-[#FAF9F6] border border-[#181A1B]/15
+    focus:border-[#1E6F44] focus:ring-1 focus:ring-[#1E6F44]/35`;
 
   const handleChange = (e) =>
     setFields((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -45,7 +44,7 @@ const ContactForm = () => {
       {/* Name + Email row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-mono text-gray-500 tracking-wider uppercase">Name</label>
+          <label className="text-xs font-mono font-bold text-[#8C908D] tracking-wider uppercase">Name</label>
           <input
             name="name"
             value={fields.name}
@@ -56,7 +55,7 @@ const ContactForm = () => {
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-mono text-gray-500 tracking-wider uppercase">Email</label>
+          <label className="text-xs font-mono font-bold text-[#8C908D] tracking-wider uppercase">Email</label>
           <input
             name="email"
             type="email"
@@ -71,7 +70,7 @@ const ContactForm = () => {
 
       {/* Subject */}
       <div className="flex flex-col gap-1.5">
-        <label className="text-xs font-mono text-gray-500 tracking-wider uppercase">Subject</label>
+        <label className="text-xs font-mono font-bold text-[#8C908D] tracking-wider uppercase">Subject</label>
         <input
           name="subject"
           value={fields.subject}
@@ -84,7 +83,7 @@ const ContactForm = () => {
 
       {/* Message */}
       <div className="flex flex-col gap-1.5">
-        <label className="text-xs font-mono text-gray-500 tracking-wider uppercase">Message</label>
+        <label className="text-xs font-mono font-bold text-[#8C908D] tracking-wider uppercase">Message</label>
         <textarea
           name="message"
           value={fields.message}
@@ -100,13 +99,9 @@ const ContactForm = () => {
       <motion.button
         type="submit"
         disabled={status === "sending"}
-        whileHover={status !== "sending" ? { scale: 1.02, boxShadow: "0 0 24px rgba(0,255,157,0.35)" } : {}}
+        whileHover={status !== "sending" ? { scale: 1.02 } : {}}
         whileTap={status !== "sending" ? { scale: 0.98 } : {}}
-        className="flex items-center justify-center gap-2 py-3 px-6 rounded-xl font-semibold text-sm transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
-        style={{
-          background: "linear-gradient(135deg, #00FF9D, #4CC9F0)",
-          color: "#0B1020",
-        }}
+        className="flex items-center justify-center gap-2 py-3 px-6 rounded-xl font-bold text-sm bg-[#181A1B] text-[#F6F5F0] hover:bg-[#1E6F44] hover:shadow-[3px_3px_0px_#181A1B] transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
       >
         {status === "sending" ? (
           <>
@@ -128,8 +123,8 @@ const ContactForm = () => {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm"
-            style={{ background: "rgba(0,255,157,0.08)", border: "1px solid rgba(0,255,157,0.2)", color: "#00FF9D" }}
+            className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-bold"
+            style={{ background: "rgba(30,111,68,0.08)", border: "1px solid rgba(30,111,68,0.2)", color: "#1E6F44" }}
           >
             <CheckCircle size={15} />
             Message sent successfully! I'll get back to you soon.
@@ -140,8 +135,8 @@ const ContactForm = () => {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm"
-            style={{ background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.2)", color: "#F87171" }}
+            className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-bold"
+            style={{ background: "rgba(194,94,41,0.08)", border: "1px solid rgba(194,94,41,0.2)", color: "#C25E29" }}
           >
             <AlertCircle size={15} />
             Something went wrong. Please try again later.

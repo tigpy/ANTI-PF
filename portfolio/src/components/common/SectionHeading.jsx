@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { fadeUp } from "../../animations/fadeUp";
+import DecryptText from "./DecryptText";
 
 /**
  * SectionHeading — consistent heading used by every section.
@@ -9,14 +10,14 @@ import { fadeUp } from "../../animations/fadeUp";
  *   title      — main heading text
  *   subtitle   — optional subheading / descriptor line
  *   align      — "left" | "center" (default: "center")
- *   accent     — "#00FF9D" | "#4CC9F0" (default: "#00FF9D")
+ *   accent     — "#1E6F44" | "#2B6282" (default: "#1E6F44")
  *   className
  */
 const SectionHeading = ({
   title,
   subtitle,
   align = "center",
-  accent = "#00FF9D",
+  accent = "#1E6F44",
   className = "",
 }) => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
@@ -48,8 +49,8 @@ const SectionHeading = ({
       </div>
 
       {/* Main title */}
-      <h2 className="text-3xl md:text-4xl font-bold text-white font-poppins leading-tight">
-        {title}
+      <h2 className="text-3xl md:text-4xl font-bold text-[#181A1B] font-poppins leading-tight">
+        <DecryptText text={title} />
       </h2>
 
       {/* Underline accent bar */}

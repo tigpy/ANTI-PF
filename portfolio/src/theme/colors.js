@@ -1,25 +1,26 @@
 export const colors = {
   bg: {
-    primary:   "#0B1020",
-    secondary: "#131B2E",
-    card:      "rgba(19, 27, 46, 0.55)",
-    cardHover: "rgba(19, 27, 46, 0.75)",
+    primary:   "#F6F5F0",
+    secondary: "#EFECE3",
+    card:      "rgba(239, 236, 227, 0.65)",
+    cardHover: "rgba(239, 236, 227, 0.85)",
   },
   accent: {
-    green:     "#00FF9D",
-    blue:      "#4CC9F0",
-    greenGlow: "rgba(0, 255, 157, 0.3)",
-    blueGlow:  "rgba(76, 201, 240, 0.3)",
+    green:     "#1E6F44", // Vintage terminal green
+    blue:      "#2B6282", // Blueprint Slate blue
+    orange:    "#C25E29", // Rust/Terracotta
+    greenGlow: "rgba(30, 111, 68, 0.1)",
+    blueGlow:  "rgba(43, 98, 130, 0.1)",
   },
   text: {
-    primary:   "#FFFFFF",
-    secondary: "#94A3B8",   // gray-400 equivalent
-    muted:     "#64748B",
-    terminal:  "#00FF9D",
+    primary:   "#181A1B", // Charcoal ink
+    secondary: "#5C615D", // Slate-oatmeal grey
+    muted:     "#8C908D",
+    terminal:  "#1E6F44",
   },
   border: {
-    default:   "rgba(255, 255, 255, 0.1)",
-    accent:    "#00FF9D",
-    subtle:    "rgba(255, 255, 255, 0.05)",
+    default:   "rgba(24, 26, 27, 0.15)",
+    accent:    "#1E6F44",
+    subtle:    "rgba(24, 26, 27, 0.08)",
   },
 };

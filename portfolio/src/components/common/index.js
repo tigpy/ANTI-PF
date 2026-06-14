@@ -5,3 +5,5 @@ export { default as Container }      from "./Container";
 export { default as SectionHeading } from "./SectionHeading";
 export { default as TerminalCard }   from "./TerminalCard";
 export { default as SocialButton }   from "./SocialButton";
+export { default as CustomCursor }   from "./CustomCursor";
+export { default as TiltWrapper }   from "./TiltWrapper";

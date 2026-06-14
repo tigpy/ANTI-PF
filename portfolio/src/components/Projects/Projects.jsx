@@ -24,13 +24,12 @@ const Projects = () => {
       <section
         id="projects"
         className="py-20 relative overflow-hidden"
-        // bg handled globally
       >
         {/* Background glow */}
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
           style={{
-            background: "radial-gradient(circle, rgba(76,201,240,0.04) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(43,98,130,0.03) 0%, transparent 70%)",
             filter: "blur(80px)",
           }}
         />
@@ -39,7 +38,7 @@ const Projects = () => {
           <SectionHeading
             title="Projects"
             subtitle="What I've Built"
-            accent="#00FF9D"
+            accent="#1E6F44"
           />
 
           <div ref={ref}>
@@ -58,10 +57,10 @@ const Projects = () => {
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
               transition={{ delay: 0.1 }}
-              className="text-center text-gray-500 text-sm font-mono mb-8 -mt-6"
+              className="text-center text-[#8C908D] text-sm font-mono font-bold mb-8 -mt-6"
             >
               Showing{" "}
-              <span style={{ color: "#00FF9D" }}>{filtered.length}</span>{" "}
+              <span style={{ color: "#1E6F44" }}>{filtered.length}</span>{" "}
               project{filtered.length !== 1 ? "s" : ""}
               {activeFilter !== "All" && ` in ${activeFilter}`}
             </motion.p>

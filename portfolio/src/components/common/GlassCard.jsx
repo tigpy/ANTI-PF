@@ -29,7 +29,7 @@ const GlassCard = ({
       : glass.card;
 
   const hoverStyle = hover
-    ? "transition-all duration-300 hover:border-[#00FF9D] hover:shadow-[0_0_25px_rgba(0,255,157,0.3)] cursor-default"
+    ? `${glass.cardHover} cursor-default`
     : "";
 
   return (

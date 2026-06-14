@@ -1,23 +1,23 @@
 import { motion } from "framer-motion";
 import { staggerItem } from "../../animations/staggerCards";
 
-const StatCard = ({ icon: Icon, label, value, accent = "#00FF9D", delay = 0 }) => {
+const StatCard = ({ icon: Icon, label, value, accent = "#1E6F44", delay = 0 }) => {
   return (
     <motion.div
       variants={staggerItem}
-      whileHover={{ scale: 1.04, y: -5 }}
+      whileHover={{ scale: 1.03 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
-      className="flex flex-col items-center text-center p-6 rounded-2xl border border-white/10 transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,255,157,0.12)] group"
+      className="flex flex-col items-center text-center p-6 rounded-2xl border border-[#181A1B]/12 transition-all duration-300 hover:shadow-[3.5px_3.5px_0px_#181A1B] group"
       style={{
-        background: "rgba(19,27,46,0.65)",
+        background: "rgba(239, 236, 227, 0.65)",
         backdropFilter: "blur(20px)",
-        borderColor: "rgba(255,255,255,0.08)",
+        borderColor: "rgba(24, 26, 27, 0.12)",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = `${accent}40`;
+        e.currentTarget.style.borderColor = accent;
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+        e.currentTarget.style.borderColor = "rgba(24, 26, 27, 0.12)";
       }}
     >
       {/* Icon ring */}
@@ -40,7 +40,7 @@ const StatCard = ({ icon: Icon, label, value, accent = "#00FF9D", delay = 0 }) =
       </p>
 
       {/* Label */}
-      <p className="text-gray-400 text-sm font-medium">{label}</p>
+      <p className="text-[#5C615D] text-sm font-semibold">{label}</p>
     </motion.div>
   );
 };

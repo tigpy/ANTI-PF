@@ -1,0 +1,9 @@
+node_modules
+dist
+.git
+.gitignore
+.vercel
+package-lock.json
+Dockerfile
+nginx.conf
+README.md

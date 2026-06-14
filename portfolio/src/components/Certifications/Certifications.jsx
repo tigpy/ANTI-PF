@@ -44,7 +44,7 @@ const Certifications = () => {
         <div
           className="absolute bottom-0 right-0 w-96 h-96 pointer-events-none"
           style={{
-            background: "radial-gradient(circle, rgba(0,255,157,0.04) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(30,111,68,0.03) 0%, transparent 70%)",
             filter: "blur(80px)",
           }}
         />
@@ -53,7 +53,7 @@ const Certifications = () => {
           <SectionHeading
             title="Certifications"
             subtitle="Credentials & Learning"
-            accent="#00FF9D"
+            accent="#1E6F44"
           />
 
           <div ref={ref}>
@@ -65,14 +65,14 @@ const Certifications = () => {
               className="mb-4"
             >
               <div className="flex items-center gap-3 mb-6">
-                <Award size={16} className="text-[#00FF9D]" />
-                <span className="text-sm font-mono text-gray-400 tracking-widest uppercase">
+                <Award size={16} className="text-[#1E6F44]" />
+                <span className="text-sm font-bold font-mono text-[#5C615D] tracking-widest uppercase">
                   Completed
                 </span>
-                <div className="flex-1 h-px bg-white/8" />
+                <div className="flex-1 h-px bg-[#181A1B]/10" />
                 <span
-                  className="text-xs font-mono px-2.5 py-1 rounded-full"
-                  style={{ background: "rgba(0,255,157,0.08)", color: "#00FF9D", border: "1px solid rgba(0,255,157,0.2)" }}
+                  className="text-xs font-mono font-bold px-2.5 py-1 rounded-full"
+                  style={{ background: "rgba(30,111,68,0.08)", color: "#1E6F44", border: "1px solid rgba(30,111,68,0.2)" }}
                 >
                   {completed.length} earned
                 </span>
@@ -99,14 +99,14 @@ const Certifications = () => {
               className="mb-4"
             >
               <div className="flex items-center gap-3 mb-6">
-                <Award size={16} className="text-[#FF9900]" />
-                <span className="text-sm font-mono text-gray-400 tracking-widest uppercase">
+                <Award size={16} className="text-[#C25E29]" />
+                <span className="text-sm font-bold font-mono text-[#5C615D] tracking-widest uppercase">
                   Currently Pursuing
                 </span>
-                <div className="flex-1 h-px bg-white/8" />
+                <div className="flex-1 h-px bg-[#181A1B]/10" />
                 <span
-                  className="text-xs font-mono px-2.5 py-1 rounded-full"
-                  style={{ background: "rgba(255,153,0,0.08)", color: "#FF9900", border: "1px solid rgba(255,153,0,0.2)" }}
+                  className="text-xs font-mono font-bold px-2.5 py-1 rounded-full"
+                  style={{ background: "rgba(194,94,41,0.08)", color: "#C25E29", border: "1px solid rgba(194,94,41,0.2)" }}
                 >
                   {pursuing.length} in progress
                 </span>
@@ -136,7 +136,7 @@ const Certifications = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setActiveImage(null)}
-            className="fixed inset-0 z-55 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4"
+            className="fixed inset-0 z-55 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
           >
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
@@ -144,18 +144,18 @@ const Certifications = () => {
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ duration: 0.3 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-4xl max-h-[85vh] overflow-hidden rounded-2xl border border-white/10"
+              className="relative max-w-4xl max-h-[85vh] overflow-hidden rounded-2xl border-2 border-[#181A1B]"
               style={{
-                background: "rgba(13,20,38,0.9)",
-                boxShadow: "0 0 50px rgba(0,0,0,0.8)",
+                background: "#FAF9F6",
+                boxShadow: "4px 4px 0px #181A1B",
               }}
             >
               {/* Close Button */}
               <motion.button
                 onClick={() => setActiveImage(null)}
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.9 }}
-                className="absolute top-4 right-4 z-10 w-9 h-9 flex items-center justify-center rounded-xl bg-black/60 border border-white/10 text-gray-300 hover:text-white transition-all duration-200"
+                className="absolute top-4 right-4 z-10 w-9 h-9 flex items-center justify-center rounded-xl bg-[#EFECE3] border border-[#181A1B]/15 text-[#5C615D] hover:text-[#181A1B] hover:border-[#181A1B] hover:shadow-[2px_2px_0px_#181A1B] transition-all duration-200"
               >
                 <X size={16} />
               </motion.button>

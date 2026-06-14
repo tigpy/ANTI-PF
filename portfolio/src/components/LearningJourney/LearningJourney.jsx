@@ -14,12 +14,11 @@ const LearningJourney = () => {
     <section
       id="learning"
       className="py-20 relative overflow-hidden"
-      // bg handled globally
     >
       <div
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse, rgba(0,255,157,0.04) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse, rgba(30,111,68,0.03) 0%, transparent 70%)",
           filter: "blur(60px)",
         }}
       />
@@ -28,7 +27,7 @@ const LearningJourney = () => {
         <SectionHeading
           title="Learning Journey"
           subtitle="Always Growing"
-          accent="#00FF9D"
+          accent="#1E6F44"
         />
 
         <div ref={ref}>
@@ -39,8 +38,8 @@ const LearningJourney = () => {
             animate={inView ? "visible" : "hidden"}
             className="flex items-center gap-3 justify-center mb-14"
           >
-            <BookOpen size={15} className="text-[#00FF9D]" />
-            <p className="text-gray-400 text-sm text-center max-w-lg">
+            <BookOpen size={15} className="text-[#1E6F44]" />
+            <p className="text-[#5C615D] text-sm font-semibold text-center max-w-lg">
               Continuously expanding my skills across cloud security, AI, and threat intelligence.
             </p>
           </motion.div>
@@ -49,8 +48,8 @@ const LearningJourney = () => {
           <div className="relative">
             {/* Vertical line — desktop */}
             <div
-              className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px"
-              style={{ background: "linear-gradient(180deg, transparent, rgba(0,255,157,0.3), transparent)" }}
+              className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5"
+              style={{ background: "linear-gradient(180deg, transparent, rgba(30,111,68,0.25), transparent)" }}
             />
 
             <motion.div

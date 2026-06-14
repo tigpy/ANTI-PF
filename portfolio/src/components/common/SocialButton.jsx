@@ -17,7 +17,7 @@ const SocialButton = ({
   label,
   showLabel = false,
   size = "md",
-  accent = "#00FF9D",
+  accent = "#1E6F44",
 }) => {
   const sizeMap = {
     sm: { wrapper: "w-8 h-8",  icon: 14 },
@@ -33,19 +33,19 @@ const SocialButton = ({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      whileHover={{ scale: 1.1, y: -2 }}
+      whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       className={[
-        showLabel ? "flex items-center gap-2 px-4 py-2 rounded-xl" : `${wrapper} rounded-xl flex items-center justify-center`,
-        "bg-white/5 border border-white/10",
-        "text-gray-400 transition-all duration-300",
-        "hover:bg-white/10 hover:border-white/25",
+        showLabel ? "flex items-center gap-2 px-4 py-2 rounded-xl font-medium" : `${wrapper} rounded-xl flex items-center justify-center`,
+        "bg-[#EFECE3] border border-[#181A1B]/12",
+        "text-[#5C615D] transition-all duration-300",
+        "hover:bg-[#EAE6DC]",
       ].join(" ")}
       style={{ "--accent": accent }}
       onMouseEnter={(e) => {
         e.currentTarget.style.color = accent;
-        e.currentTarget.style.borderColor = `${accent}40`;
-        e.currentTarget.style.boxShadow = `0 0 16px ${accent}25`;
+        e.currentTarget.style.borderColor = "#181A1B";
+        e.currentTarget.style.boxShadow = "2px 2px 0px #181A1B";
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.color = "";
@@ -55,7 +55,7 @@ const SocialButton = ({
     >
       <Icon size={iconSize} />
       {showLabel && (
-        <span className="text-sm font-medium text-gray-300">{label}</span>
+        <span className="text-sm font-medium text-[#181A1B]">{label}</span>
       )}
     </motion.a>
   );

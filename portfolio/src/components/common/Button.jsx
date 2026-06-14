@@ -35,24 +35,22 @@ const Button = ({
 
   const variantClasses = {
     primary: [
-      "bg-gradient-to-r from-[#00FF9D] to-[#4CC9F0]",
-      "text-[#0B1020] font-semibold",
-      "hover:shadow-[0_0_20px_rgba(0,255,157,0.4)]",
-      "hover:brightness-110",
+      "bg-[#181A1B]",
+      "text-[#F6F5F0] font-semibold",
+      "hover:bg-[#1E6F44] hover:shadow-[3px_3px_0px_rgba(24,26,27,0.3)]",
     ].join(" "),
 
     secondary: [
       "bg-transparent",
-      "border border-white/20",
-      "text-white font-medium",
-      "hover:bg-white/10",
-      "hover:border-white/40",
+      "border-2 border-[#181A1B]",
+      "text-[#181A1B] font-semibold",
+      "hover:bg-[#EFECE3]",
     ].join(" "),
 
     ghost: [
       "bg-transparent",
-      "text-[#00FF9D] font-medium",
-      "hover:bg-[#00FF9D]/10",
+      "text-[#1E6F44] font-semibold",
+      "hover:bg-[#1E6F44]/8",
     ].join(" "),
   };
 
@@ -60,7 +58,7 @@ const Button = ({
     "inline-flex items-center gap-2",
     "rounded-xl",
     "transition-all duration-300",
-    "focus:outline-none focus:ring-2 focus:ring-[#00FF9D]/50",
+    "focus:outline-none focus:ring-2 focus:ring-[#1E6F44]/40",
     disabled ? "opacity-50 cursor-not-allowed pointer-events-none" : "",
     sizeClasses[size],
     variantClasses[variant],
