@@ -52,19 +52,45 @@ const Navbar = () => {
   // Highlight active nav link based on scroll position
   useEffect(() => {
     const sections = NAV_LINKS.map((l) => l.href.replace("#", ""));
+    const observedElements = new Set();
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) setActiveSection(entry.target.id);
         });
       },
-      { threshold: 0.35 }
+      { threshold: 0.05, rootMargin: "-20% 0px -40% 0px" }
     );
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
+
+    const updateObservers = () => {
+      sections.forEach((id) => {
+        if (!observedElements.has(id)) {
+          const el = document.getElementById(id);
+          if (el) {
+            observer.observe(el);
+            observedElements.add(id);
+          }
+        }
+      });
+    };
+
+    updateObservers();
+
+    const mutationObserver = new MutationObserver(() => {
+      updateObservers();
     });
-    return () => observer.disconnect();
+
+    const rootEl = document.getElementById("root") || document.body;
+    mutationObserver.observe(rootEl, {
+      childList: true,
+      subtree: true,
+    });
+
+    return () => {
+      observer.disconnect();
+      mutationObserver.disconnect();
+    };
   }, []);
 
   // Lock body scroll when mobile menu is open
