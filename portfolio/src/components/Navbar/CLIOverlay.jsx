@@ -20,8 +20,18 @@ export default function CLIOverlay({ isOpen, onClose }) {
   ]);
   const [ctfUnlocked, setCtfUnlocked] = useState(false);
   const [isDestructMode, setIsDestructMode] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const scrollContainerRef = useRef(null);
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    const checkResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkResize();
+    window.addEventListener('resize', checkResize);
+    return () => window.removeEventListener('resize', checkResize);
+  }, []);
 
   // Listen for self-destruct activations
   useEffect(() => {
@@ -238,8 +248,8 @@ export default function CLIOverlay({ isOpen, onClose }) {
     right: 0,
     top: 0,
     zIndex: 99999,
-    height: '55vh',
-    maxHeight: '550px',
+    height: isMobile ? '70vh' : '55vh',
+    maxHeight: isMobile ? 'none' : '550px',
     borderBottom: isDestructMode ? '4px solid #C25E29' : '2px solid #181A1B',
     backgroundColor: '#F6F5F0',
     boxShadow: '0px 10px 30px rgba(24,26,27,0.15)',
@@ -247,29 +257,30 @@ export default function CLIOverlay({ isOpen, onClose }) {
     flexDirection: 'column',
     transition: 'all 0.3s ease-in-out',
     fontFamily: 'monospace',
-    fontSize: '12px',
+    fontSize: isMobile ? '11px' : '12px',
     color: '#181A1B'
   };
 
   const titleBarStyle = {
     backgroundColor: isDestructMode ? '#C25E29' : '#181A1B',
     color: '#FAF9F6',
-    padding: '8px 16px',
+    padding: isMobile ? '8px 12px' : '8px 16px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     zIndex: 10,
     fontWeight: 'bold',
-    transition: 'background-color 0.3s ease'
+    transition: 'background-color 0.3s ease',
+    fontSize: isMobile ? '10px' : '12px'
   };
 
   const panelContainerStyle = {
     flex: 1,
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: isMobile ? 'column' : 'row',
     overflow: 'hidden',
-    padding: '16px',
-    gap: '16px',
+    padding: isMobile ? '8px' : '16px',
+    gap: isMobile ? '8px' : '16px',
     zIndex: 10
   };
 
@@ -279,8 +290,8 @@ export default function CLIOverlay({ isOpen, onClose }) {
     flexDirection: 'column',
     border: '1px solid #181A1B',
     backgroundColor: '#FAF9F6',
-    padding: '12px',
-    boxShadow: '2.5px 2.5px 0px #181A1B',
+    padding: isMobile ? '8px' : '12px',
+    boxShadow: isMobile ? '1.5px 1.5px 0px #181A1B' : '2.5px 2.5px 0px #181A1B',
     overflow: 'hidden'
   };
 
@@ -310,7 +321,7 @@ export default function CLIOverlay({ isOpen, onClose }) {
   };
 
   const oscPanelStyle = {
-    display: 'flex',
+    display: isMobile ? 'none' : 'flex',
     width: '320px',
     flexDirection: 'column',
     gap: '8px'
@@ -322,6 +333,31 @@ export default function CLIOverlay({ isOpen, onClose }) {
     padding: '10px',
     fontSize: '10px',
     boxShadow: '2.5px 2.5px 0px #181A1B'
+  };
+
+  const ctfLayerStyle = {
+    position: 'fixed',
+    inset: 0,
+    backgroundColor: '#181A1B',
+    color: '#1E6F44',
+    fontFamily: 'monospace',
+    zIndex: 100001,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    padding: isMobile ? '24px 16px' : '48px',
+    overflowY: 'auto',
+    boxSizing: 'border-box'
+  };
+
+  const ctfContentContainerStyle = {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+    gap: '24px'
   };
 
   return (
@@ -339,7 +375,7 @@ export default function CLIOverlay({ isOpen, onClose }) {
             className="w-2 h-2 rounded-full bg-[#1E6F44] animate-ping" 
             style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: isDestructMode ? '#C25E29' : '#1E6F44' }}
           />
-          {isDestructMode ? '[CRITICAL_SYSTEM_RECOVERY_CONSOLE]' : '[SYS_TERMINAL_DIAGNOSTICS]'}
+          {isDestructMode ? (isMobile ? '[RECOVERY_CLI]' : '[CRITICAL_SYSTEM_RECOVERY_CONSOLE]') : (isMobile ? '[SYS_CLI_DIAG]' : '[SYS_TERMINAL_DIAGNOSTICS]')}
         </span>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           {!isDestructMode && (
@@ -425,7 +461,7 @@ export default function CLIOverlay({ isOpen, onClose }) {
         </div>
 
         {/* Oscilloscope Panel (Hidden on Mobile) */}
-        <div className="hidden md:flex" style={oscPanelStyle}>
+        <div style={oscPanelStyle}>
           <div style={{ flex: 1, minHeight: '150px', display: 'flex', flexDirection: 'column' }}>
             <Oscilloscope className="w-full h-full shadow-[2.5px_2.5px_0px_#181A1B]" />
           </div>
@@ -441,12 +477,23 @@ export default function CLIOverlay({ isOpen, onClose }) {
 
       {/* Full-screen Congratulatory CTF Decrypt Layer */}
       {ctfUnlocked && (
-        <div className="fixed inset-0 bg-[#181A1B] text-[#1E6F44] font-mono z-[10001] flex flex-col justify-between p-6 md:p-12 overflow-y-auto">
+        <div style={ctfLayerStyle}>
           <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.15)_50%)] bg-[size:100%_4px] z-20" />
           
-          <div className="space-y-8 flex-1 flex flex-col items-center justify-center text-center">
+          <div style={ctfContentContainerStyle}>
             {/* ASCII Banner */}
-            <pre className="text-[8px] md:text-xs leading-tight select-none overflow-x-auto max-w-full text-center">
+            <pre 
+              style={{
+                fontSize: isMobile ? '4.5px' : '9px',
+                lineHeight: '1.2',
+                userSelect: 'none',
+                overflowX: 'auto',
+                maxWidth: '100%',
+                textAlign: 'center',
+                margin: '0 auto',
+                whiteSpace: 'pre'
+              }}
+            >
 {`
   _    ____ ____ _____ ____ ____     ____ ____   _    _   _ _____ _____ ____  
  / \\  / ___/ ___| ____/ ___/ ___|   / ___|  _ \\ / \\  | \\ | |_   _| ____|  _ \\ 
@@ -456,24 +503,48 @@ export default function CLIOverlay({ isOpen, onClose }) {
 `}
             </pre>
 
-            <div className="space-y-3 max-w-md bg-[#FAF9F6] text-[#181A1B] border-4 border-[#1E6F44] p-6 shadow-[8px_8px_0px_#1E6F44]">
-              <h3 className="text-lg font-bold tracking-widest">[ PUZZLE DECIPHERED ]</h3>
-              <p className="text-xs text-left">
+            <div 
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px',
+                maxWidth: '450px',
+                backgroundColor: '#FAF9F6',
+                color: '#181A1B',
+                border: '4px solid #1E6F44',
+                padding: isMobile ? '16px' : '24px',
+                boxShadow: '8px 8px 0px #1E6F44',
+                textAlign: 'left'
+              }}
+            >
+              <h3 style={{ fontSize: isMobile ? '14px' : '18px', fontWeight: 'bold', letterSpacing: '0.1em', margin: 0, textAlign: 'center' }}>[ PUZZLE DECIPHERED ]</h3>
+              <p style={{ fontSize: '11px', lineHeight: '1.5', margin: 0 }}>
                 Congratulations! You successfully hacked into the matrix, located the hidden shards in the source comments and cookie vectors, and bypassed our firewall.
               </p>
-              <div className="text-xs text-left font-bold text-[#1E6F44] mt-2">
+              <div style={{ fontSize: '11px', fontWeight: 'bold', color: '#1E6F44', marginTop: '8px' }}>
                 STATUS: MASTER SYSTEM BYPASS GRANTED
               </div>
             </div>
           </div>
 
-          <div className="text-center mt-6">
+          <div style={{ textAlign: 'center', marginTop: '24px' }}>
             <button
               onClick={() => {
                 setCtfUnlocked(false);
                 onClose();
               }}
-              className="px-6 py-2 border-2 border-[#1E6F44] hover:bg-[#1E6F44] hover:text-[#FAF9F6] transition-colors text-sm font-bold uppercase"
+              style={{
+                padding: '10px 24px',
+                border: '2px solid #1E6F44',
+                backgroundColor: 'transparent',
+                color: '#1E6F44',
+                fontWeight: 'bold',
+                textTransform: 'uppercase',
+                fontSize: '12px',
+                fontFamily: 'monospace',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease'
+              }}
             >
               Terminate Uplink & Return [ESC]
             </button>
