@@ -176,49 +176,49 @@ body {
 
   /* Map arbitrary Tailwind color utility classes to CSS variables */
   /* Background overrides */
-  .bg-\[\#F6F5F0\],
-  .bg-\[\#F6F5F0\]\/92 {
+  .bg-\[\#f6f5f0\],
+  .bg-\[\#f6f5f0\]\/92 {
     background-color: var(--bg-primary) !important;
   }
-  .bg-\[\#EFECE3\],
-  .bg-\[\#EFECE3\]\/80 {
+  .bg-\[\#efece3\],
+  .bg-\[\#efece3\]\/80 {
     background-color: var(--bg-secondary) !important;
   }
-  .bg-\[\#FAF9F6\] {
+  .bg-\[\#faf9f6\] {
     background-color: var(--bg-tertiary) !important;
   }
-  .bg-\[\#EAE6DC\] {
+  .bg-\[\#eae6dc\] {
     background-color: var(--bg-secondary) !important;
   }
   
   /* Text overrides */
-  .text-\[\#181A1B\] {
+  .text-\[\#181a1b\] {
     color: var(--text-primary) !important;
   }
-  .text-\[\#5C615D\] {
+  .text-\[\#5c615d\] {
     color: var(--text-secondary) !important;
   }
-  .text-\[\#8C908D\] {
+  .text-\[\#8c908d\] {
     color: var(--text-muted) !important;
   }
 
   /* Border overrides */
-  .border-\[\#181A1B\],
-  .border-\[\#181A1B\]\/15,
-  .border-\[\#181A1B\]\/12,
-  .border-\[\#181A1B\]\/10,
-  .border-\[\#181A1B\]\/5 {
+  .border-\[\#181a1b\],
+  .border-\[\#181a1b\]\/15,
+  .border-\[\#181a1b\]\/12,
+  .border-\[\#181a1b\]\/10,
+  .border-\[\#181a1b\]\/5 {
     border-color: var(--border) !important;
   }
-  .border-t.border-\[\#181A1B\]\/10 {
+  .border-t.border-\[\#181a1b\]\/10 {
     border-top-color: var(--border-subtle) !important;
   }
-  .border-b.border-\[\#181A1B\]\/5 {
+  .border-b.border-\[\#181a1b\]\/5 {
     border-bottom-color: var(--border-subtle) !important;
   }
 
   /* Custom Hover state borders and shadows */
-  .hover\:border-\[\#181A1B\]:hover {
+  .hover\:border-\[\#181a1b\]:hover {
     border-color: var(--text-primary) !important;
   }
   
@@ -234,19 +234,19 @@ body {
   .shadow-\[4px_4px_0px_rgba\(24\,26\,27\,0\.9\)\] {
     box-shadow: 4px 4px 0px rgba(250, 249, 246, 0.9) !important;
   }
-  .shadow-\[3px_3px_0px_\#181A1B\] {
+  .shadow-\[3px_3px_0px_\#181a1b\] {
     box-shadow: 3px 3px 0px var(--text-primary) !important;
   }
-  .shadow-\[4px_4px_0px_\#181A1B\] {
+  .shadow-\[4px_4px_0px_\#181a1b\] {
     box-shadow: 4px 4px 0px var(--text-primary) !important;
   }
-  .hover\:shadow-\[3px_3px_0px_\#181A1B\]:hover {
+  .hover\:shadow-\[3px_3px_0px_\#181a1b\]:hover {
     box-shadow: 3px 3px 0px var(--text-primary) !important;
   }
-  .hover\:shadow-\[3\.5px_3\.5px_0px_\#181A1B\]:hover {
+  .hover\:shadow-\[3\.5px_3\.5px_0px_\#181a1b\]:hover {
     box-shadow: 3.5px 3.5px 0px var(--text-primary) !important;
   }
-  .hover\:shadow-\[2px_2px_0px_\#181A1B\]:hover {
+  .hover\:shadow-\[2px_2px_0px_\#181a1b\]:hover {
     box-shadow: 2px 2px 0px var(--text-primary) !important;
   }
 }

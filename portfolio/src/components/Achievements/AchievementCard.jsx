@@ -21,7 +21,7 @@ const AchievementCard = ({ achievement }) => {
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
       className="relative p-7 rounded-2xl border border-[#181A1B]/12 overflow-hidden group transition-all duration-300 hover:border-[#1E6F44] hover:shadow-[3px_3px_0px_#181A1B]"
-      style={{ background: "rgba(239, 236, 227, 0.65)", backdropFilter: "blur(20px)" }}
+      style={{ background: "var(--bg-card)", backdropFilter: "blur(20px)" }}
     >
       {/* Corner glow */}
       <div

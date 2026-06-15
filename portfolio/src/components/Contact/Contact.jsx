@@ -87,7 +87,7 @@ const Contact = () => {
                   key={label}
                   variants={staggerItem}
                   className="flex items-center gap-4 p-4 rounded-xl border border-[#181A1B]/12 transition-all duration-300 hover:border-[#1E6F44] hover:shadow-[3px_3px_0px_#181A1B]"
-                  style={{ background: "rgba(239, 236, 227, 0.65)", backdropFilter: "blur(16px)" }}
+                  style={{ background: "var(--bg-card)", backdropFilter: "blur(16px)" }}
                 >
                   <div
                     className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
@@ -125,7 +125,7 @@ const Contact = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="w-11 h-11 flex items-center justify-center rounded-xl border border-[#181A1B]/12 text-[#5C615D] transition-all duration-300 hover:bg-[#EAE6DC]"
-                    style={{ background: "rgba(239, 236, 227, 0.65)" }}
+                    style={{ background: "var(--bg-card)" }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.color = accent;
                       e.currentTarget.style.borderColor = "#181A1B";
