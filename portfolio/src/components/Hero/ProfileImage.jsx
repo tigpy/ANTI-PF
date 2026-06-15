@@ -104,7 +104,7 @@ const ProfileImage = () => {
       >
         <div
           className="w-full h-full rounded-full"
-          style={{ background: "#F6F5F0" }}
+          style={{ background: "var(--bg-primary)" }}
         />
       </div>
 
@@ -121,7 +121,7 @@ const ProfileImage = () => {
         initial={{ scale: 0.85, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.3 }}
-        className="relative z-10 w-[calc(100%-16px)] h-[calc(100%-16px)] rounded-full overflow-hidden border-2 border-[#181A1B]/15 bg-[#FAF9F6]"
+        className="relative z-10 w-[calc(100%-16px)] h-[calc(100%-16px)] rounded-full overflow-hidden border-2 border-[#181A1B]/15 bg-[var(--bg-tertiary)]"
       >
         {!showAscii ? (
           <img
@@ -135,7 +135,7 @@ const ProfileImage = () => {
               // Fallback avatar if image not found
               e.target.style.display = "none";
               e.target.parentElement.style.background =
-                "linear-gradient(135deg, #EFECE3 0%, #FAF9F6 100%)";
+                "linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%)";
               const initials = document.createElement("span");
               initials.textContent = "AS";
               initials.style.cssText =
@@ -144,7 +144,7 @@ const ProfileImage = () => {
             }}
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center p-4 bg-[#F6F5F0] overflow-hidden">
+          <div className="absolute inset-0 flex items-center justify-center p-4 bg-[var(--bg-primary)] overflow-hidden">
             {/* Scanline CRT overlay */}
             <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.08)_50%)] bg-[size:100%_3px]" />
             <pre className="text-[3px] md:text-[3.5px] lg:text-[4px] leading-[3px] md:leading-[3.5px] lg:leading-[4px] font-mono tracking-[0.5px] text-[#1E6F44] font-bold text-center select-none w-full h-full flex items-center justify-center">
@@ -170,9 +170,9 @@ const ProfileImage = () => {
         transition={{ delay: 1.1, duration: 0.5 }}
         className="absolute -bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold font-mono whitespace-nowrap"
         style={{
-          background: "#FAF9F6",
-          border: "2.5px solid #181A1B",
-          boxShadow: "2.5px 2.5px 0px #181A1B",
+          background: "var(--bg-tertiary)",
+          border: "2.5px solid var(--text-primary)",
+          boxShadow: "2.5px 2.5px 0px var(--text-primary)",
         }}
       >
         <span className="w-2.5 h-2.5 rounded-full bg-[#1E6F44] animate-pulse" />

@@ -18,7 +18,7 @@ const Footer = () => {
   return (
     <footer
       className="relative border-t border-[#181A1B]/15 pt-14 pb-8"
-      style={{ background: "#FAF9F6" }}
+      style={{ background: "var(--bg-tertiary)" }}
     >
       {/* Top glow */}
       <div

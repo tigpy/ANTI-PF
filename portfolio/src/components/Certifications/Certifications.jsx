@@ -146,8 +146,8 @@ const Certifications = () => {
               onClick={(e) => e.stopPropagation()}
               className="relative max-w-4xl max-h-[85vh] overflow-hidden rounded-2xl border-2 border-[#181A1B]"
               style={{
-                background: "#FAF9F6",
-                boxShadow: "4px 4px 0px #181A1B",
+                background: "var(--bg-tertiary)",
+                boxShadow: "4px 4px 0px var(--text-primary)",
               }}
             >
               {/* Close Button */}
