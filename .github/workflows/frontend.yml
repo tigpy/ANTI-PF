@@ -1,40 +1,38 @@
 name: Frontend CI/CD
 
 on:
-push:
-branches:
-- main
-paths:
-- 'portfolio/**'
-- '.github/workflows/frontend.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'portfolio/**'
+      - '.github/workflows/frontend.yml'
 
 jobs:
-build-and-push:
-runs-on: ubuntu-latest
+  build-and-push:
+    runs-on: ubuntu-latest
 
-```
-permissions:
-  contents: read
-  packages: write
+    permissions:
+      contents: read
+      packages: write
 
-steps:
-  - name: Checkout repository
-    uses: actions/checkout@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-  - name: Login to GitHub Container Registry
-    uses: docker/login-action@v3
-    with:
-      registry: ghcr.io
-      username: ${{ github.actor }}
-      password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-  - name: Build Docker image
-    run: |
-      docker build \
-      -t ghcr.io/${{ github.repository_owner }}/anti-pf-frontend:latest \
-      ./portfolio
+      - name: Build Docker image
+        run: |
+          docker build \
+            -t ghcr.io/${{ github.repository_owner }}/anti-pf-frontend:latest \
+            ./portfolio
 
-  - name: Push Docker image
-    run: |
-      docker push ghcr.io/${{ github.repository_owner }}/anti-pf-frontend:latest
-
+      - name: Push Docker image
+        run: |
+          docker push ghcr.io/${{ github.repository_owner }}/anti-pf-frontend:latest
