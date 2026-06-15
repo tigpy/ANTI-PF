@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { Award, X } from "lucide-react";
 import { useInView } from "react-intersection-observer";
 import CertCard from "./CertCard";
@@ -44,7 +44,7 @@ const Certifications = () => {
         <div
           className="absolute bottom-0 right-0 w-96 h-96 pointer-events-none"
           style={{
-            background: "radial-gradient(circle, rgba(30,111,68,0.03) 0%, transparent 70%)",
+            background: "radial-gradient(circle, color-mix(in srgb, var(--accent-green) 3%, transparent) 0%, transparent 70%)",
             filter: "blur(80px)",
           }}
         />
@@ -53,33 +53,37 @@ const Certifications = () => {
           <SectionHeading
             title="Certifications"
             subtitle="Credentials & Learning"
-            accent="#1E6F44"
+            accent="var(--accent-green)"
           />
 
           <div ref={ref}>
             {/* ── Completed ── */}
-            <motion.div
+            <m.div
               variants={fadeUp}
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
               className="mb-4"
             >
               <div className="flex items-center gap-3 mb-6">
-                <Award size={16} className="text-[#1E6F44]" />
-                <span className="text-sm font-bold font-mono text-[#5C615D] tracking-widest uppercase">
+                <Award size={16} className="text-accent-green" />
+                <span className="text-sm font-bold font-mono text-text-secondary tracking-widest uppercase">
                   Completed
                 </span>
-                <div className="flex-1 h-px bg-[#181A1B]/10" />
+                <div className="flex-1 h-px bg-border-color/60" />
                 <span
                   className="text-xs font-mono font-bold px-2.5 py-1 rounded-full"
-                  style={{ background: "rgba(30,111,68,0.08)", color: "#1E6F44", border: "1px solid rgba(30,111,68,0.2)" }}
+                  style={{
+                    background: "color-mix(in srgb, var(--accent-green) 8%, transparent)",
+                    color: "var(--accent-green)",
+                    border: "1px solid color-mix(in srgb, var(--accent-green) 20%, transparent)"
+                  }}
                 >
                   {completed.length} earned
                 </span>
               </div>
-            </motion.div>
+            </m.div>
 
-            <motion.div
+            <m.div
               variants={staggerContainer}
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
@@ -88,10 +92,10 @@ const Certifications = () => {
               {completed.map((cert) => (
                 <CertCard key={cert.id} cert={cert} onOpenLightbox={setActiveImage} />
               ))}
-            </motion.div>
+            </m.div>
 
             {/* ── Pursuing ── */}
-            <motion.div
+            <m.div
               variants={fadeUp}
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
@@ -99,21 +103,25 @@ const Certifications = () => {
               className="mb-4"
             >
               <div className="flex items-center gap-3 mb-6">
-                <Award size={16} className="text-[#C25E29]" />
-                <span className="text-sm font-bold font-mono text-[#5C615D] tracking-widest uppercase">
+                <Award size={16} className="text-accent-orange" />
+                <span className="text-sm font-bold font-mono text-text-secondary tracking-widest uppercase">
                   Currently Pursuing
                 </span>
-                <div className="flex-1 h-px bg-[#181A1B]/10" />
+                <div className="flex-1 h-px bg-border-color/60" />
                 <span
                   className="text-xs font-mono font-bold px-2.5 py-1 rounded-full"
-                  style={{ background: "rgba(194,94,41,0.08)", color: "#C25E29", border: "1px solid rgba(194,94,41,0.2)" }}
+                  style={{
+                    background: "color-mix(in srgb, var(--accent-orange) 8%, transparent)",
+                    color: "var(--accent-orange)",
+                    border: "1px solid color-mix(in srgb, var(--accent-orange) 20%, transparent)"
+                  }}
                 >
                   {pursuing.length} in progress
                 </span>
               </div>
-            </motion.div>
+            </m.div>
 
-            <motion.div
+            <m.div
               variants={staggerContainer}
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
@@ -123,7 +131,7 @@ const Certifications = () => {
               {pursuing.map((cert) => (
                 <CertCard key={cert.id} cert={cert} onOpenLightbox={setActiveImage} />
               ))}
-            </motion.div>
+            </m.div>
           </div>
         </Container>
       </section>
@@ -131,42 +139,42 @@ const Certifications = () => {
       {/* Lightbox Modal */}
       <AnimatePresence>
         {activeImage && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setActiveImage(null)}
             className="fixed inset-0 z-55 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
           >
-            <motion.div
+            <m.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ duration: 0.3 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-4xl max-h-[85vh] overflow-hidden rounded-2xl border-2 border-[#181A1B]"
+              className="relative max-w-4xl max-h-[85vh] overflow-hidden rounded-2xl border-2 border-text-primary"
               style={{
                 background: "var(--bg-tertiary)",
                 boxShadow: "4px 4px 0px var(--text-primary)",
               }}
             >
               {/* Close Button */}
-              <motion.button
+              <m.button
                 onClick={() => setActiveImage(null)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.9 }}
-                className="absolute top-4 right-4 z-10 w-9 h-9 flex items-center justify-center rounded-xl bg-[#EFECE3] border border-[#181A1B]/15 text-[#5C615D] hover:text-[#181A1B] hover:border-[#181A1B] hover:shadow-[2px_2px_0px_#181A1B] transition-all duration-200"
+                className="absolute top-4 right-4 z-10 w-9 h-9 flex items-center justify-center rounded-xl bg-bg-secondary border border-border-color text-text-secondary hover:text-text-primary hover:border-text-primary hover:shadow-[2px_2px_0px_var(--text-primary)] transition-all duration-200"
               >
                 <X size={16} />
-              </motion.button>
+              </m.button>
               
               <img
                 src={activeImage}
                 alt="Certificate Preview"
                 className="max-w-full max-h-[80vh] object-contain rounded-2xl"
               />
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

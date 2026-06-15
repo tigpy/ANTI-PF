@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { BookOpen } from "lucide-react";
 import TimelineItem from "./TimelineItem";
@@ -18,7 +18,7 @@ const LearningJourney = () => {
       <div
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse, rgba(30,111,68,0.03) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse, color-mix(in srgb, var(--accent-green) 3%, transparent) 0%, transparent 70%)",
           filter: "blur(60px)",
         }}
       />
@@ -27,32 +27,32 @@ const LearningJourney = () => {
         <SectionHeading
           title="Learning Journey"
           subtitle="Always Growing"
-          accent="#1E6F44"
+          accent="var(--accent-green)"
         />
 
         <div ref={ref}>
           {/* Intro line */}
-          <motion.div
+          <m.div
             variants={fadeUp}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
             className="flex items-center gap-3 justify-center mb-14"
           >
-            <BookOpen size={15} className="text-[#1E6F44]" />
-            <p className="text-[#5C615D] text-sm font-semibold text-center max-w-lg">
+            <BookOpen size={15} className="text-accent-green" />
+            <p className="text-text-secondary text-sm font-semibold text-center max-w-lg">
               Continuously expanding my skills across cloud security, AI, and threat intelligence.
             </p>
-          </motion.div>
+          </m.div>
 
           {/* Timeline */}
           <div className="relative">
             {/* Vertical line — desktop */}
             <div
               className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5"
-              style={{ background: "linear-gradient(180deg, transparent, rgba(30,111,68,0.25), transparent)" }}
+              style={{ background: "linear-gradient(180deg, transparent, color-mix(in srgb, var(--accent-green) 25%, transparent), transparent)" }}
             />
 
-            <motion.div
+            <m.div
               variants={staggerContainer}
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
@@ -66,7 +66,7 @@ const LearningJourney = () => {
                   isLast={i === learningJourneyData.length - 1}
                 />
               ))}
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </Container>

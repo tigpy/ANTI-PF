@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import AchievementCard from "./AchievementCard";
 import { SectionHeading, Container } from "../common";
@@ -13,7 +13,7 @@ const Achievements = () => {
       <div
         className="absolute top-0 right-0 w-96 h-96 pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(43,98,130,0.03) 0%, transparent 70%)",
+          background: "radial-gradient(circle, color-mix(in srgb, var(--accent-teal) 3%, transparent) 0%, transparent 70%)",
           filter: "blur(80px)",
         }}
       />
@@ -22,10 +22,10 @@ const Achievements = () => {
         <SectionHeading
           title="Achievements"
           subtitle="Milestones & Recognition"
-          accent="#1E6F44"
+          accent="var(--accent-green)"
         />
 
-        <motion.div
+        <m.div
           ref={ref}
           variants={staggerContainer}
           initial="hidden"
@@ -35,7 +35,7 @@ const Achievements = () => {
           {achievementsData.map((achievement) => (
             <AchievementCard key={achievement.id} achievement={achievement} />
           ))}
-        </motion.div>
+        </m.div>
       </Container>
     </section>
   );

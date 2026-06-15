@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-export default function Oscilloscope({ className = '', color = '#1E6F44' }) {
+export default function Oscilloscope({ className = '', color = '#24A060' }) {
   const canvasRef = useRef(null);
   const mouseActivity = useRef(0);
   const scrollActivity = useRef(0);
@@ -69,11 +69,11 @@ export default function Oscilloscope({ className = '', color = '#1E6F44' }) {
         const height = canvas.height / (window.devicePixelRatio || 1);
 
         // Clear with very slight transparency to leave a small phosphor trail
-        ctx.fillStyle = 'rgba(246, 245, 240, 0.25)'; // matching ivory cream bg
+        ctx.fillStyle = 'rgba(11, 12, 16, 0.25)'; // matching dark obsidian bg
         ctx.fillRect(0, 0, width, height);
 
         // Draw oscilloscope grid lines
-        ctx.strokeStyle = '#E2DFD5'; // sand grid lines
+        ctx.strokeStyle = 'rgba(36, 160, 96, 0.08)'; // neon green faint grid lines
         ctx.lineWidth = 0.5;
         
         ctx.beginPath();
@@ -127,7 +127,7 @@ export default function Oscilloscope({ className = '', color = '#1E6F44' }) {
         ctx.shadowBlur = 0;
 
         // Draw readout labels
-        ctx.fillStyle = '#181A1B'; // charcoal text
+        ctx.fillStyle = '#24A060'; // neon green text
         ctx.font = '9px monospace';
         ctx.fillText(`SIG: VCO_TRC_1`, 8, 14);
         ctx.fillText(`SWP: ${(baseFreq * 100).toFixed(1)}Hz`, 8, 26);
@@ -155,7 +155,7 @@ export default function Oscilloscope({ className = '', color = '#1E6F44' }) {
   }, [color]);
 
   return (
-    <div className={`relative border border-[#181A1B] bg-[#F6F5F0] overflow-hidden ${className}`}>
+    <div className={`relative border border-border-color bg-[#0B0C10] overflow-hidden ${className}`}>
       <canvas ref={canvasRef} className="w-full h-full block" />
       {/* Scanline CRT overlay effect */}
       <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.06)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02))] bg-[size:100%_4px,3px_100%]" />

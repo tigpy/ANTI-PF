@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { profileData } from "../../data/profileData";
 import { cyberSynth } from "../../utils/synth";
 import { addSnifferLog } from "../../utils/sniffer";
@@ -97,7 +97,7 @@ const ProfileImage = () => {
       <div
         className="absolute inset-0 rounded-full animate-spin-ring"
         style={{
-          background: "conic-gradient(from 0deg, #1E6F44, #C25E29, transparent, #1E6F44)",
+          background: "conic-gradient(from 0deg, var(--accent-green), var(--accent-orange), transparent, var(--accent-green))",
           padding: "3.5px",
           borderRadius: "50%",
         }}
@@ -112,21 +112,21 @@ const ProfileImage = () => {
       <div
         className="absolute inset-2 rounded-full"
         style={{
-          boxShadow: "0 0 25px rgba(30,111,68,0.08), inset 0 0 25px rgba(30,111,68,0.03)",
+          boxShadow: "0 0 25px color-mix(in srgb, var(--accent-green) 8%, transparent), inset 0 0 25px color-mix(in srgb, var(--accent-green) 3%, transparent)",
         }}
       />
 
       {/* Profile Container */}
-      <motion.div
+      <m.div
         initial={{ scale: 0.85, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.3 }}
-        className="relative z-10 w-[calc(100%-16px)] h-[calc(100%-16px)] rounded-full overflow-hidden border-2 border-[#181A1B]/15 bg-[var(--bg-tertiary)]"
+        className="relative z-10 w-[calc(100%-16px)] h-[calc(100%-16px)] rounded-full overflow-hidden border-2 border-border-color bg-bg-tertiary"
       >
         {!showAscii ? (
           <img
             ref={imgRef}
-            src="/assets/profile/profile.png"
+            src="/assets/profile/profile.webp"
             alt={profileData.name}
             className="w-full h-full object-cover"
             crossOrigin="anonymous"
@@ -139,32 +139,32 @@ const ProfileImage = () => {
               const initials = document.createElement("span");
               initials.textContent = "AS";
               initials.style.cssText =
-                "position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3rem;font-weight:700;color:#1E6F44;font-family:Poppins,sans-serif;";
+                "position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3rem;font-weight:700;color:var(--accent-green);font-family:Poppins,sans-serif;";
               e.target.parentElement.appendChild(initials);
             }}
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center p-4 bg-[var(--bg-primary)] overflow-hidden">
+          <div className="absolute inset-0 flex items-center justify-center p-4 bg-bg-primary overflow-hidden">
             {/* Scanline CRT overlay */}
             <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.08)_50%)] bg-[size:100%_3px]" />
-            <pre className="text-[3px] md:text-[3.5px] lg:text-[4px] leading-[3px] md:leading-[3.5px] lg:leading-[4px] font-mono tracking-[0.5px] text-[#1E6F44] font-bold text-center select-none w-full h-full flex items-center justify-center">
-              {asciiText}
+            <pre className="text-[3px] md:text-[3.5px] lg:text-[4px] leading-[3px] md:leading-[3.5px] lg:leading-[4px] font-mono tracking-[0.5px] text-terminal-text font-bold text-center select-none w-full h-full flex items-center justify-center">
+               {asciiText}
             </pre>
           </div>
         )}
-      </motion.div>
+      </m.div>
 
       {/* Floating Filter Switch Badge */}
       <button
         onClick={handleToggle}
-        className="absolute top-2 right-2 z-20 flex items-center px-2 py-0.5 rounded border border-[#181A1B] text-[9px] font-mono font-bold bg-[#EFECE3] text-[#181A1B] hover:bg-[#FAF9F6] shadow-[1.5px_1.5px_0px_#181A1B] active:translate-y-[1px] active:shadow-none transition-all"
+        className="absolute top-2 right-2 z-20 flex items-center px-2 py-0.5 rounded border border-text-primary text-[9px] font-mono font-bold bg-bg-secondary text-text-primary hover:bg-bg-tertiary shadow-[1.5px_1.5px_0px_var(--text-primary)] active:translate-y-[1px] active:shadow-none transition-all"
         title="Toggle Monospace ASCII Filter"
       >
         <span>{showAscii ? "[RAW_IMG]" : "[ASCII]"}</span>
       </button>
 
       {/* Floating status badge */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.1, duration: 0.5 }}
@@ -175,9 +175,9 @@ const ProfileImage = () => {
           boxShadow: "2.5px 2.5px 0px var(--text-primary)",
         }}
       >
-        <span className="w-2.5 h-2.5 rounded-full bg-[#1E6F44] animate-pulse" />
-        <span className="text-[#1E6F44]">Available for opportunities</span>
-      </motion.div>
+        <span className="w-2.5 h-2.5 rounded-full bg-accent-green animate-pulse" />
+        <span className="text-accent-green">Available for opportunities</span>
+      </m.div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { glass } from "../../styles/glass";
 
 /**
@@ -33,13 +33,13 @@ const GlassCard = ({
     : "";
 
   return (
-    <motion.div
+    <m.div
       className={`${baseStyle} ${hoverStyle} ${padding} ${className}`}
       onClick={onClick}
       {...motionProps}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 };
 

@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 const TiltWrapper = ({ children, className = "", maxRotation = 8, disabled = false }) => {
   const cardRef = useRef(null);
   const highlightRef = useRef(null);
+  const rectRef = useRef(null);
 
   // Check if device is mobile (no pointer capabilities) to disable tilt
   const [isMobile, setIsMobile] = useState(true);
@@ -16,7 +17,7 @@ const TiltWrapper = ({ children, className = "", maxRotation = 8, disabled = fal
 
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
+    const rect = rectRef.current || cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
@@ -36,12 +37,16 @@ const TiltWrapper = ({ children, className = "", maxRotation = 8, disabled = fal
   };
 
   const handleMouseEnter = () => {
+    if (cardRef.current) {
+      rectRef.current = cardRef.current.getBoundingClientRect();
+    }
     if (highlightRef.current) {
       highlightRef.current.style.opacity = "1";
     }
   };
 
   const handleMouseLeave = () => {
+    rectRef.current = null;
     if (highlightRef.current) {
       highlightRef.current.style.opacity = "0";
     }

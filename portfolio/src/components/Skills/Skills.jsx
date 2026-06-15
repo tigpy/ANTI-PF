@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { Shield, Code2, Server, Cloud, Wrench } from "lucide-react";
 import { useInView } from "react-intersection-observer";
 import SkillTab from "./SkillTab";
@@ -31,8 +31,7 @@ const Skills = () => {
       <div
         className="absolute top-0 right-0 w-96 h-96 rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(30,111,68,0.03) 0%, transparent 70%)",
-          filter: "blur(80px)",
+          background: "radial-gradient(circle, color-mix(in srgb, var(--accent-green) 6%, transparent) 0%, color-mix(in srgb, var(--accent-green) 1.5%, transparent) 45%, transparent 70%)",
         }}
       />
 
@@ -40,12 +39,12 @@ const Skills = () => {
         <SectionHeading
           title="Skills & Technologies"
           subtitle="What I Work With"
-          accent="#1E6F44"
+          accent="var(--accent-green)"
         />
 
         <div ref={ref}>
           {/* Tab bar */}
-          <motion.div
+          <m.div
             variants={fadeUp}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
@@ -60,11 +59,11 @@ const Skills = () => {
                 icon={TAB_ICONS[category]}
               />
             ))}
-          </motion.div>
+          </m.div>
 
           {/* Content panel */}
           <AnimatePresence mode="wait">
-            <motion.div
+            <m.div
               key={activeTab}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -72,35 +71,35 @@ const Skills = () => {
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
               <div
-                className="rounded-3xl p-8 md:p-10 border-2 border-[#181A1B]/15"
+                className="rounded-3xl p-8 md:p-10 border-2 border-border-color"
                 style={{
-                  background: "rgba(239, 236, 227, 0.7)",
+                  background: "var(--bg-card)",
                   backdropFilter: "blur(20px)",
-                  boxShadow: "4px 4px 0px #181A1B",
+                  boxShadow: "4px 4px 0px var(--text-primary)",
                 }}
               >
                 {/* Panel header */}
-                <div className="flex items-center justify-between mb-8 pb-6 border-b border-[#181A1B]/10">
+                <div className="flex items-center justify-between mb-8 pb-6 border-b border-border-color/60">
                   <div className="flex items-center gap-3">
                     {TAB_ICONS[activeTab] && (
                       <div
                         className="w-10 h-10 rounded-xl flex items-center justify-center"
                         style={{
-                          background: "rgba(30,111,68,0.08)",
-                          border: "1px solid rgba(30,111,68,0.25)",
+                          background: "color-mix(in srgb, var(--accent-green) 8%, transparent)",
+                          border: "1px solid color-mix(in srgb, var(--accent-green) 25%, transparent)",
                         }}
                       >
                         {(() => {
                           const Icon = TAB_ICONS[activeTab];
-                          return <Icon size={18} color="#1E6F44" />;
+                          return <Icon size={18} style={{ color: "var(--accent-green)" }} />;
                         })()}
                       </div>
                     )}
                     <div>
-                      <h3 className="text-[#181A1B] font-bold font-poppins text-lg">
+                      <h3 className="text-text-primary font-bold font-poppins text-lg">
                         {activeTab}
                       </h3>
-                      <p className="text-[#8C908D] text-xs mt-0.5 font-semibold">
+                      <p className="text-text-muted text-xs mt-0.5 font-semibold">
                         {activeCategory?.skills.length} skills
                       </p>
                     </div>
@@ -124,7 +123,7 @@ const Skills = () => {
                 </div>
 
                 {/* Mobile badge pills */}
-                <div className="md:hidden mt-8 pt-6 border-t border-[#181A1B]/10 flex flex-wrap gap-2">
+                <div className="md:hidden mt-8 pt-6 border-t border-border-color/60 flex flex-wrap gap-2">
                   {activeCategory?.skills.map(({ name }) => (
                     <Badge key={name} variant="default" size="sm">
                       {name}
@@ -132,11 +131,11 @@ const Skills = () => {
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </AnimatePresence>
 
           {/* All-skills quick-view row */}
-          <motion.div
+          <m.div
             variants={fadeUp}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
@@ -150,7 +149,7 @@ const Skills = () => {
                 </Badge>
               ))
             )}
-          </motion.div>
+          </m.div>
         </div>
       </Container>
     </section>

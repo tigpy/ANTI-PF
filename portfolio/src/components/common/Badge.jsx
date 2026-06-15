@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 /**
  * Badge — pill-style tag for tech stacks, categories, statuses.
@@ -21,15 +21,15 @@ const Badge = ({
   };
 
   const variantClasses = {
-    default: "bg-[#EFECE3] text-[#181A1B] border border-[#181A1B]/12 hover:bg-[#1E6F44]/10 hover:text-[#1E6F44] hover:border-[#1E6F44]/30",
-    green:   "bg-[#1E6F44]/10 text-[#1E6F44] border border-[#1E6F44]/20",
-    blue:    "bg-[#2B6282]/10 text-[#2B6282] border border-[#2B6282]/20",
-    orange:  "bg-[#C25E29]/10 text-[#C25E29] border border-[#C25E29]/20",
-    outline: "bg-transparent text-[#5C615D] border border-[#181A1B]/15 hover:border-[#1E6F44]",
+    default: "bg-bg-secondary text-text-primary border border-border-color hover:bg-accent-green/10 hover:text-accent-green hover:border-accent-green/30",
+    green:   "bg-accent-green/10 text-accent-green border border-accent-green/20",
+    blue:    "bg-accent-teal/10 text-accent-teal border border-accent-teal/20",
+    orange:  "bg-accent-orange/10 text-accent-orange border border-accent-orange/20",
+    outline: "bg-transparent text-text-secondary border border-border-color hover:border-accent-green",
   };
 
   return (
-    <motion.span
+    <m.span
       whileHover={{ scale: 1.05 }}
       className={[
         "inline-flex items-center rounded-full font-medium",
@@ -40,7 +40,7 @@ const Badge = ({
       ].join(" ")}
     >
       {children}
-    </motion.span>
+    </m.span>
   );
 };
 

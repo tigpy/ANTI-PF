@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import FilterBar from "./FilterBar";
 import ProjectCard from "./ProjectCard";
@@ -29,7 +29,7 @@ const Projects = () => {
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
           style={{
-            background: "radial-gradient(circle, rgba(43,98,130,0.03) 0%, transparent 70%)",
+            background: "radial-gradient(circle, color-mix(in srgb, var(--accent-teal) 3%, transparent) 0%, transparent 70%)",
             filter: "blur(80px)",
           }}
         />
@@ -38,36 +38,36 @@ const Projects = () => {
           <SectionHeading
             title="Projects"
             subtitle="What I've Built"
-            accent="#1E6F44"
+            accent="var(--accent-green)"
           />
 
           <div ref={ref}>
             {/* Filter bar */}
-            <motion.div
+            <m.div
               variants={fadeUp}
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
             >
               <FilterBar active={activeFilter} onChange={setActiveFilter} />
-            </motion.div>
+            </m.div>
 
             {/* Project count */}
-            <motion.p
+            <m.p
               variants={fadeUp}
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
               transition={{ delay: 0.1 }}
-              className="text-center text-[#8C908D] text-sm font-mono font-bold mb-8 -mt-6"
+              className="text-center text-text-muted text-sm font-mono font-bold mb-8 -mt-6"
             >
               Showing{" "}
-              <span style={{ color: "#1E6F44" }}>{filtered.length}</span>{" "}
+              <span style={{ color: "var(--accent-green)" }}>{filtered.length}</span>{" "}
               project{filtered.length !== 1 ? "s" : ""}
               {activeFilter !== "All" && ` in ${activeFilter}`}
-            </motion.p>
+            </m.p>
 
             {/* Cards grid */}
             <AnimatePresence mode="wait">
-              <motion.div
+              <m.div
                 key={activeFilter}
                 variants={staggerContainer}
                 initial="hidden"
@@ -82,7 +82,7 @@ const Projects = () => {
                     onOpenModal={setSelectedProject}
                   />
                 ))}
-              </motion.div>
+              </m.div>
             </AnimatePresence>
           </div>
         </Container>

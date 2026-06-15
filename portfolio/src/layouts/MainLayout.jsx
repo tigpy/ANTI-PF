@@ -146,24 +146,21 @@ const MainLayout = ({ children }) => {
         <div
           className="absolute top-0 left-0 w-[700px] h-[700px] rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(30,111,68,0.04) 0%, transparent 65%)",
-            filter: "blur(100px)",
+            background: "radial-gradient(circle at 50% 50%, rgba(30,111,68,0.05) 0%, rgba(30,111,68,0.02) 40%, rgba(30,111,68,0.005) 70%, transparent 100%)",
             transform: "translate(-25%, -25%)",
           }}
         />
         <div
           className="absolute top-1/3 right-0 w-[600px] h-[600px] rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(194,94,41,0.03) 0%, transparent 65%)",
-            filter: "blur(100px)",
+            background: "radial-gradient(circle at 50% 50%, rgba(194,94,41,0.04) 0%, rgba(194,94,41,0.015) 45%, rgba(194,94,41,0.003) 70%, transparent 100%)",
             transform: "translateX(25%)",
           }}
         />
         <div
           className="absolute bottom-0 left-1/3 w-[500px] h-[500px] rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(43,98,130,0.03) 0%, transparent 65%)",
-            filter: "blur(90px)",
+            background: "radial-gradient(circle at 50% 50%, rgba(43,98,130,0.04) 0%, rgba(43,98,130,0.015) 45%, rgba(43,98,130,0.003) 70%, transparent 100%)",
           }}
         />
       </div>

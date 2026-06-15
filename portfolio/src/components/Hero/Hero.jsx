@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { FileText, Mail, ChevronDown } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
@@ -50,37 +50,36 @@ const Hero = () => {
           {/* ── Left: Text content ── */}
           <div className="flex-1 max-w-xl">
             {/* Greeting */}
-            <motion.p
+            <m.p
               variants={slideLeft}
               initial="hidden"
               animate="visible"
-              className="text-[#1E6F44] font-mono text-sm mb-3 tracking-widest uppercase font-bold"
+              className="text-accent-green font-mono text-sm mb-3 tracking-widest uppercase font-bold"
             >
               Hello, I'm
-            </motion.p>
+            </m.p>
 
             {/* Name */}
-            <motion.h1
+            <m.h1
               variants={slideLeft}
               initial="hidden"
               animate="visible"
               transition={{ delay: 0.1 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold font-poppins text-[#181A1B] leading-[1.1] mb-4"
+              className="text-5xl md:text-6xl lg:text-7xl font-bold font-poppins text-text-primary leading-[1.1] mb-4"
             >
               {profileData.name}
-            </motion.h1>
+            </m.h1>
 
             {/* Animated typing role */}
-            <motion.div
+            <m.div
               variants={slideLeft}
               initial="hidden"
               animate="visible"
               transition={{ delay: 0.2 }}
               className="flex items-center gap-2 mb-4"
             >
-              <span className="text-[#1E6F44] font-mono text-sm select-none font-bold">›</span>
-              <span className="text-xl md:text-2xl font-bold font-mono"
-                style={{ color: "#2B6282" }}>
+              <span className="text-accent-green font-mono text-sm select-none font-bold">›</span>
+              <span className="text-xl md:text-2xl font-bold font-mono text-accent-teal">
                 <TypeAnimation
                   sequence={buildTypingSequence(profileData.typingRoles)}
                   wrapper="span"
@@ -89,88 +88,78 @@ const Hero = () => {
                   repeat={Infinity}
                 />
               </span>
-            </motion.div>
+            </m.div>
 
             {/* Tagline */}
-            <motion.p
+            <m.p
               variants={slideLeft}
               initial="hidden"
               animate="visible"
               transition={{ delay: 0.3 }}
-              className="text-[#5C615D] text-base md:text-lg leading-relaxed mb-8 max-w-md"
+              className="text-text-secondary text-base md:text-lg leading-relaxed mb-8 max-w-md"
             >
               {profileData.tagline}
-            </motion.p>
+            </m.p>
 
             {/* CTA buttons */}
-            <motion.div
+            <m.div
               variants={slideLeft}
               initial="hidden"
               animate="visible"
               transition={{ delay: 0.4 }}
               className="flex flex-wrap gap-3 mb-8"
             >
-              <motion.a
+              <a
                 href={profileData.resumeLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#181A1B] text-[#F6F5F0] font-bold text-sm hover:bg-[#1E6F44] hover:shadow-[3px_3px_0px_#181A1B] transition-all duration-300"
+                className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-text-primary text-bg-primary font-bold text-sm hover:bg-accent-green hover:shadow-[3px_3px_0px_var(--border-color)] hover:scale-105 active:scale-95 transition-all duration-300"
               >
                 <FileText size={16} />
                 Resume
-              </motion.a>
+              </a>
 
-              <motion.a
+              <a
                 href={profileData.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#EFECE3] border border-[#181A1B]/15 text-[#5C615D] hover:text-[#181A1B] hover:border-[#181A1B] hover:shadow-[2px_2px_0px_#181A1B] font-semibold text-sm transition-all duration-300"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-bg-secondary border border-border-color text-text-secondary hover:text-text-primary hover:border-text-primary hover:shadow-[2px_2px_0px_var(--text-primary)] hover:scale-105 active:scale-95 transition-all duration-300"
               >
                 <FaGithub size={16} />
                 GitHub
-              </motion.a>
+              </a>
 
-              <motion.a
+              <a
                 href={profileData.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#EFECE3] border border-[#181A1B]/15 text-[#5C615D] hover:text-[#2B6282] hover:border-[#2B6282] hover:shadow-[2px_2px_0px_#181A1B] font-semibold text-sm transition-all duration-300"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-bg-secondary border border-border-color text-text-secondary hover:text-accent-teal hover:border-accent-teal hover:shadow-[2px_2px_0px_var(--text-primary)] hover:scale-105 active:scale-95 transition-all duration-300"
               >
                 <FaLinkedin size={16} />
                 LinkedIn
-              </motion.a>
+              </a>
 
-              <motion.a
+              <a
                 href={profileData.tryhackme}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#EFECE3] border border-[#181A1B]/15 text-[#5C615D] hover:text-[#1E6F44] hover:border-[#1E6F44] hover:shadow-[2px_2px_0px_#181A1B] font-semibold text-sm transition-all duration-300"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-bg-secondary border border-border-color text-text-secondary hover:text-accent-green hover:border-accent-green hover:shadow-[2px_2px_0px_var(--text-primary)] hover:scale-105 active:scale-95 transition-all duration-300"
               >
                 <SiTryhackme size={15} />
                 TryHackMe
-              </motion.a>
+              </a>
 
-              <motion.a
+              <a
                 href={`mailto:${profileData.email}`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#EFECE3] border border-[#181A1B]/15 text-[#5C615D] hover:text-[#181A1B] hover:border-[#181A1B] hover:shadow-[2px_2px_0px_#181A1B] font-semibold text-sm transition-all duration-300"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-bg-secondary border border-border-color text-text-secondary hover:text-text-primary hover:border-text-primary hover:shadow-[2px_2px_0px_var(--text-primary)] hover:scale-105 active:scale-95 transition-all duration-300"
               >
                 <Mail size={16} />
                 Email
-              </motion.a>
-            </motion.div>
+              </a>
+            </m.div>
 
             {/* Terminal card */}
-            <motion.div
+            <m.div
               variants={slideLeft}
               initial="hidden"
               animate="visible"
@@ -183,11 +172,11 @@ const Hero = () => {
                   lines={heroTerminalLines}
                 />
               </TiltWrapper>
-            </motion.div>
+            </m.div>
           </div>
 
           {/* ── Right: Profile image ── */}
-          <motion.div
+          <m.div
             variants={slideRight}
             initial="hidden"
             animate="visible"
@@ -195,27 +184,27 @@ const Hero = () => {
             className="flex flex-col items-center gap-8"
           >
             <ProfileImage />
-          </motion.div>
+          </m.div>
         </div>
       </div>
 
       {/* ── Scroll down indicator ── */}
-      <motion.button
+      <m.button
         onClick={handleScrollDown}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.4, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-gray-500 hover:text-[#1E6F44] transition-colors duration-300 group"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-text-muted hover:text-accent-green transition-colors duration-300 group"
         aria-label="Scroll to about"
       >
         <span className="text-xs font-mono tracking-widest uppercase">scroll</span>
-        <motion.div
+        <m.div
           animate={{ y: [0, 5, 0] }}
           transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
         >
           <ChevronDown size={18} />
-        </motion.div>
-      </motion.button>
+        </m.div>
+      </m.button>
     </section>
   );
 };
