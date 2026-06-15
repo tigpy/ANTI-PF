@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { Send, CheckCircle, AlertCircle, Loader } from "lucide-react";
 
 const ContactForm = () => {
@@ -7,9 +7,9 @@ const ContactForm = () => {
   const [status, setStatus] = useState("idle"); // idle | sending | success | error
   const [fields, setFields] = useState({ name: "", email: "", subject: "", message: "" });
 
-  const inputClass = `w-full px-4 py-3 rounded-xl text-[#181A1B] text-sm placeholder-[#8C908D] transition-all duration-300 outline-none font-medium
-    bg-[#FAF9F6] border border-[#181A1B]/15
-    focus:border-[#1E6F44] focus:ring-1 focus:ring-[#1E6F44]/35`;
+  const inputClass = `w-full px-4 py-3 rounded-xl text-text-primary text-sm placeholder-text-muted transition-all duration-300 outline-none font-medium
+    bg-bg-secondary border border-border-color
+    focus:border-accent-green focus:ring-1 focus:ring-accent-green/35`;
 
   const handleChange = (e) =>
     setFields((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -44,7 +44,7 @@ const ContactForm = () => {
       {/* Name + Email row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-mono font-bold text-[#8C908D] tracking-wider uppercase">Name</label>
+          <label className="text-xs font-mono font-bold text-text-muted tracking-wider uppercase">Name</label>
           <input
             name="name"
             value={fields.name}
@@ -55,7 +55,7 @@ const ContactForm = () => {
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-mono font-bold text-[#8C908D] tracking-wider uppercase">Email</label>
+          <label className="text-xs font-mono font-bold text-text-muted tracking-wider uppercase">Email</label>
           <input
             name="email"
             type="email"
@@ -70,7 +70,7 @@ const ContactForm = () => {
 
       {/* Subject */}
       <div className="flex flex-col gap-1.5">
-        <label className="text-xs font-mono font-bold text-[#8C908D] tracking-wider uppercase">Subject</label>
+        <label className="text-xs font-mono font-bold text-text-muted tracking-wider uppercase">Subject</label>
         <input
           name="subject"
           value={fields.subject}
@@ -83,7 +83,7 @@ const ContactForm = () => {
 
       {/* Message */}
       <div className="flex flex-col gap-1.5">
-        <label className="text-xs font-mono font-bold text-[#8C908D] tracking-wider uppercase">Message</label>
+        <label className="text-xs font-mono font-bold text-text-muted tracking-wider uppercase">Message</label>
         <textarea
           name="message"
           value={fields.message}
@@ -96,12 +96,12 @@ const ContactForm = () => {
       </div>
 
       {/* Submit button */}
-      <motion.button
+      <m.button
         type="submit"
         disabled={status === "sending"}
         whileHover={status !== "sending" ? { scale: 1.02 } : {}}
         whileTap={status !== "sending" ? { scale: 0.98 } : {}}
-        className="flex items-center justify-center gap-2 py-3 px-6 rounded-xl font-bold text-sm bg-[#181A1B] text-[#F6F5F0] hover:bg-[#1E6F44] hover:shadow-[3px_3px_0px_#181A1B] transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+        className="flex items-center justify-center gap-2 py-3 px-6 rounded-xl font-bold text-sm bg-text-primary text-bg-primary hover:bg-accent-green hover:shadow-[3px_3px_0px_var(--text-primary)] transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
       >
         {status === "sending" ? (
           <>
@@ -114,33 +114,41 @@ const ContactForm = () => {
             Send Message
           </>
         )}
-      </motion.button>
+      </m.button>
 
       {/* Feedback messages */}
       <AnimatePresence>
         {status === "success" && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-bold"
-            style={{ background: "rgba(30,111,68,0.08)", border: "1px solid rgba(30,111,68,0.2)", color: "#1E6F44" }}
+            style={{
+              background: "color-mix(in srgb, var(--accent-green) 8%, transparent)",
+              border: "1px solid color-mix(in srgb, var(--accent-green) 20%, transparent)",
+              color: "var(--accent-green)"
+            }}
           >
             <CheckCircle size={15} />
             Message sent successfully! I'll get back to you soon.
-          </motion.div>
+          </m.div>
         )}
         {status === "error" && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-bold"
-            style={{ background: "rgba(194,94,41,0.08)", border: "1px solid rgba(194,94,41,0.2)", color: "#C25E29" }}
+            style={{
+              background: "color-mix(in srgb, var(--accent-orange) 8%, transparent)",
+              border: "1px solid color-mix(in srgb, var(--accent-orange) 20%, transparent)",
+              color: "var(--accent-orange)"
+            }}
           >
             <AlertCircle size={15} />
             Something went wrong. Please try again later.
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </form>

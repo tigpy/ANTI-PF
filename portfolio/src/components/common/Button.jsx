@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 /**
  * Button — unified button component.
@@ -35,22 +35,22 @@ const Button = ({
 
   const variantClasses = {
     primary: [
-      "bg-[#181A1B]",
-      "text-[#F6F5F0] font-semibold",
-      "hover:bg-[#1E6F44] hover:shadow-[3px_3px_0px_rgba(24,26,27,0.3)]",
+      "bg-text-primary",
+      "text-bg-primary font-semibold",
+      "hover:bg-accent-green hover:shadow-[3px_3px_0px_var(--border-color)]",
     ].join(" "),
 
     secondary: [
       "bg-transparent",
-      "border-2 border-[#181A1B]",
-      "text-[#181A1B] font-semibold",
-      "hover:bg-[#EFECE3]",
+      "border-2 border-text-primary",
+      "text-text-primary font-semibold",
+      "hover:bg-bg-secondary",
     ].join(" "),
 
     ghost: [
       "bg-transparent",
-      "text-[#1E6F44] font-semibold",
-      "hover:bg-[#1E6F44]/8",
+      "text-accent-green font-semibold",
+      "hover:bg-accent-green/8",
     ].join(" "),
   };
 
@@ -58,7 +58,7 @@ const Button = ({
     "inline-flex items-center gap-2",
     "rounded-xl",
     "transition-all duration-300",
-    "focus:outline-none focus:ring-2 focus:ring-[#1E6F44]/40",
+    "focus:outline-none focus:ring-2 focus:ring-accent-green/40",
     disabled ? "opacity-50 cursor-not-allowed pointer-events-none" : "",
     sizeClasses[size],
     variantClasses[variant],
@@ -77,7 +77,7 @@ const Button = ({
 
   if (href) {
     return (
-      <motion.a
+      <m.a
         href={href}
         target={external ? "_blank" : undefined}
         rel={external ? "noopener noreferrer" : undefined}
@@ -86,12 +86,12 @@ const Button = ({
         whileTap={{ scale: disabled ? 1 : 0.97 }}
       >
         {content}
-      </motion.a>
+      </m.a>
     );
   }
 
   return (
-    <motion.button
+    <m.button
       className={baseClasses}
       onClick={onClick}
       disabled={disabled}
@@ -99,7 +99,7 @@ const Button = ({
       whileTap={{ scale: disabled ? 1 : 0.97 }}
     >
       {content}
-    </motion.button>
+    </m.button>
   );
 };
 

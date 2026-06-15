@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ExternalLink, Eye } from "lucide-react";
 import { FaGithub as Github } from "react-icons/fa";
 import { Badge, TiltWrapper } from "../common";
@@ -9,28 +9,28 @@ import DecryptProjectDescription from "./DecryptProjectDescription";
 const ProjectCard = ({ project, onOpenModal }) => {
   const [isHovered, setIsHovered] = useState(false);
   const categoryColor = {
-    Cybersecurity: "#1E6F44", // Vintage Green
-    AI:            "#2B6282", // Blueprint Blue
-    Web:           "#6366F1", // Indigo
-    Cloud:         "#C25E29", // Rust Orange
+    Cybersecurity: "var(--accent-green)", // Vintage Green / Teal
+    AI:            "var(--accent-teal)",  // Blueprint Blue / Teal Blue
+    Web:           "var(--accent-teal)",  // Blueprint Blue / Teal Blue
+    Cloud:         "var(--accent-orange)", // Rust Orange / Terracotta
   };
 
-  const accent = categoryColor[project.category] || "#1E6F44";
+  const accent = categoryColor[project.category] || "var(--accent-green)";
 
   return (
     <TiltWrapper maxRotation={6} className="flex flex-col h-full">
-      <motion.div
+      <m.div
         variants={staggerItem}
         layout
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="relative flex flex-col rounded-3xl border-2 border-[#181A1B]/15 overflow-hidden group transition-all duration-300 hover:border-[#1E6F44] hover:shadow-[4px_4px_0px_#181A1B] h-full"
-        style={{ background: "var(--bg-card)", backdropFilter: "blur(20px)" }}
+        className="relative flex flex-col rounded-3xl border-2 border-border-color overflow-hidden group transition-all duration-300 hover:border-accent-green hover:shadow-[4px_4px_0px_var(--text-primary)] h-full"
+        style={{ background: "var(--bg-card)", backdropFilter: "blur(20px)", "--project-accent": accent }}
       >
         {/* Top accent bar */}
         <div
           className="h-0.5 w-full transition-all duration-500 group-hover:opacity-100 opacity-60"
-          style={{ background: `linear-gradient(90deg, ${accent}, transparent)` }}
+          style={{ background: "linear-gradient(90deg, var(--project-accent), transparent)" }}
         />
 
         {/* Featured badge */}
@@ -39,9 +39,9 @@ const ProjectCard = ({ project, onOpenModal }) => {
             <span
               className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full tracking-widest uppercase"
               style={{
-                background: `${accent}12`,
-                border: `1px solid ${accent}30`,
-                color: accent,
+                background: "color-mix(in srgb, var(--project-accent) 7%, transparent)",
+                border: "1px solid color-mix(in srgb, var(--project-accent) 18%, transparent)",
+                color: "var(--project-accent)",
               }}
             >
               Featured
@@ -51,10 +51,11 @@ const ProjectCard = ({ project, onOpenModal }) => {
 
         {/* Project Thumbnail */}
         {project.image && (
-          <div className="relative overflow-hidden aspect-video w-full border-b border-[#181A1B]/10">
+          <div className="relative overflow-hidden aspect-video w-full border-b border-border-color/30">
             <img
               src={project.image}
               alt={project.title}
+              loading="lazy"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>
@@ -66,9 +67,9 @@ const ProjectCard = ({ project, onOpenModal }) => {
             <span
               className="text-xs font-mono font-bold px-2.5 py-1 rounded-full"
               style={{
-                background: `${accent}12`,
-                border: `1px solid ${accent}25`,
-                color: accent,
+                background: "color-mix(in srgb, var(--project-accent) 7%, transparent)",
+                border: "1px solid color-mix(in srgb, var(--project-accent) 15%, transparent)",
+                color: "var(--project-accent)",
               }}
             >
               {project.category}
@@ -76,10 +77,10 @@ const ProjectCard = ({ project, onOpenModal }) => {
           </div>
 
           {/* Title + subtitle */}
-          <h3 className="text-[#181A1B] font-bold font-poppins text-lg leading-snug mb-1 group-hover:text-[#1E6F44] transition-colors duration-300">
+          <h3 className="text-text-primary font-bold font-poppins text-lg leading-snug mb-1 group-hover:text-accent-green transition-colors duration-300">
             {project.title}
           </h3>
-          <p className="text-[#8C908D] text-xs font-mono font-semibold mb-3">{project.subtitle}</p>
+          <p className="text-text-muted text-xs font-mono font-semibold mb-3">{project.subtitle}</p>
 
           {/* Description */}
           <DecryptProjectDescription 
@@ -106,57 +107,57 @@ const ProjectCard = ({ project, onOpenModal }) => {
           <div className="flex-1" />
 
           {/* Footer actions */}
-          <div className="flex items-center gap-2 pt-4 border-t border-[#181A1B]/10">
+          <div className="flex items-center gap-2 pt-4 border-t border-border-color/60">
             {/* Details button */}
-            <motion.button
+            <m.button
               onClick={() => onOpenModal(project)}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer"
               style={{
-                background: `${accent}12`,
-                border: `1px solid ${accent}25`,
-                color: accent,
+                background: "color-mix(in srgb, var(--project-accent) 7%, transparent)",
+                border: "1px solid color-mix(in srgb, var(--project-accent) 15%, transparent)",
+                color: "var(--project-accent)",
               }}
             >
               <Eye size={12} />
               Details
-            </motion.button>
+            </m.button>
 
             {/* GitHub */}
             {project.github && (
-              <motion.a
+              <m.a
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-[#EFECE3] border border-[#181A1B]/15 text-[#5C615D] hover:text-[#181A1B] hover:border-[#181A1B] hover:shadow-[1.5px_1.5px_0px_#181A1B] transition-all duration-200"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-bg-secondary border border-border-color text-text-secondary hover:text-text-primary hover:border-text-primary hover:shadow-[1.5px_1.5px_0px_var(--text-primary)] transition-all duration-200"
               >
                 <Github size={12} />
                 GitHub
-              </motion.a>
+              </m.a>
             )}
 
             {/* Live */}
             {project.live && (
-              <motion.a
+              <m.a
                 href={project.live}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-[#EFECE3] border border-[#181A1B]/15 text-[#5C615D] hover:text-[#2B6282] hover:border-[#2B6282] hover:shadow-[1.5px_1.5px_0px_#181A1B] transition-all duration-200"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-bg-secondary border border-border-color text-text-secondary hover:text-accent-teal hover:border-accent-teal hover:shadow-[1.5px_1.5px_0px_var(--text-primary)] transition-all duration-200"
               >
                 <ExternalLink size={12} />
                 Live Demo
-              </motion.a>
+              </m.a>
             )}
           </div>
         </div>
-      </motion.div>
+      </m.div>
     </TiltWrapper>
   );
 };
 
-export default ProjectCard;
+export default React.memo(ProjectCard);

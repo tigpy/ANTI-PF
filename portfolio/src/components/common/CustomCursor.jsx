@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { m, useMotionValue, useSpring } from "framer-motion";
 
 const CustomCursor = () => {
   const [isMobile, setIsMobile] = useState(true);
@@ -33,18 +33,22 @@ const CustomCursor = () => {
   useEffect(() => {
     if (isMobile) return;
 
+    let animFrame;
     const handleMove = (e) => {
       if (!visibleRef.current) {
         visibleRef.current = true;
         setVisible(true);
       }
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
+      if (animFrame) cancelAnimationFrame(animFrame);
+      animFrame = requestAnimationFrame(() => {
+        mouseX.set(e.clientX);
+        mouseY.set(e.clientY);
 
-      // Perform direct DOM updates for coordinates to avoid React re-renders
-      if (coordsRef.current) {
-        coordsRef.current.innerText = `${Math.round(e.clientX)}, ${Math.round(e.clientY)}`;
-      }
+        // Perform direct DOM updates for coordinates to avoid React re-renders
+        if (coordsRef.current) {
+          coordsRef.current.innerText = `${Math.round(e.clientX)}, ${Math.round(e.clientY)}`;
+        }
+      });
     };
 
     const handleLeave = () => {
@@ -64,6 +68,7 @@ const CustomCursor = () => {
       window.removeEventListener("mousemove", handleMove);
       document.removeEventListener("mouseleave", handleLeave);
       document.removeEventListener("mouseenter", handleEnter);
+      if (animFrame) cancelAnimationFrame(animFrame);
     };
   }, [isMobile, mouseX, mouseY]);
 
@@ -79,26 +84,26 @@ const CustomCursor = () => {
       const isInput = target.closest("input, textarea, select");
 
       let status = "SYS_OK";
-      let color = "#1E6F44"; // Forest green
+      let color = "var(--accent-green)"; // Forest green / Teal
       let spinSpeed = "6s";
       let scale = "scale(1)";
 
       if (isInput) {
         status = "INPUT_ACT";
-        color = "#2B6282"; // Blueprint blue
+        color = "var(--accent-teal)"; // Blueprint blue / Teal blue
         spinSpeed = "2s";
         scale = "scale(0.8)";
       } else if (isLink) {
         status = "TARGET_LOCK";
-        color = "#C25E29"; // Terracotta alert orange
+        color = "var(--accent-orange)"; // Terracotta alert orange
         spinSpeed = "1.2s";
         scale = "scale(1.25)";
       }
 
       // A. Update status indicator text & color
       if (labelRef.current) {
-        labelRef.current.innerText = `[${status}]`;
         labelRef.current.style.color = color;
+        labelRef.current.innerText = `[${status}]`;
       }
 
       // B. Update targeted DOM element path details
@@ -112,8 +117,8 @@ const CustomCursor = () => {
             nodeName += `.${firstClass}`;
           }
         }
-        nodeRef.current.innerText = `[NODE: ${nodeName.slice(0, 18)}]`;
         nodeRef.current.style.color = color;
+        nodeRef.current.innerText = `[NODE: ${nodeName.slice(0, 18)}]`;
       }
 
       // C. Update radar circular scope and sweep styles directly
@@ -145,8 +150,8 @@ const CustomCursor = () => {
       style={{ opacity: visible ? 1 : 0, transition: "opacity 0.25s ease-out" }}
     >
       {/* ── Inner Direct Dot ── */}
-      <motion.div
-        className="fixed w-1.5 h-1.5 rounded-full bg-[#1E6F44] pointer-events-none"
+      <m.div
+        className="fixed w-1.5 h-1.5 rounded-full bg-accent-green pointer-events-none"
         style={{
           left: mouseX,
           top: mouseY,
@@ -156,7 +161,7 @@ const CustomCursor = () => {
       />
 
       {/* ── Outer Tech Radar Scope (spring delayed positioning) ── */}
-      <motion.div
+      <m.div
         className="fixed pointer-events-none flex items-center justify-center"
         style={{
           left: cursorX,
@@ -168,25 +173,25 @@ const CustomCursor = () => {
         {/* Child container handles direct DOM scaling & colors safely without Framer conflicts */}
         <div
           ref={ringRef}
-          className="relative w-8 h-8 rounded-full border border-[#1E6F44] flex items-center justify-center transition-transform duration-300"
+          className="relative w-8 h-8 rounded-full border border-accent-green flex items-center justify-center transition-transform duration-300"
           style={{ transform: "scale(1)" }}
         >
           {/* Radar Sweep sonar radius line */}
-          <div className="absolute top-1/2 left-0 w-1/2 h-px border-t border-[#1E6F44] origin-right animate-radar-sweep sweep-line" />
+          <div className="absolute top-1/2 left-0 w-1/2 h-px border-t border-accent-green origin-right animate-radar-sweep sweep-line" />
           
           {/* Circular crosshair ticks */}
-          <span className="absolute w-1.5 h-px bg-[#181A1B]/15 -top-px" />
-          <span className="absolute w-1.5 h-px bg-[#181A1B]/15 -bottom-px" />
-          <span className="absolute h-1.5 w-px bg-[#181A1B]/15 -left-px" />
-          <span className="absolute h-1.5 w-px bg-[#181A1B]/15 -right-px" />
+          <span className="absolute w-1.5 h-px bg-text-primary/15 -top-px" />
+          <span className="absolute w-1.5 h-px bg-text-primary/15 -bottom-px" />
+          <span className="absolute h-1.5 w-px bg-text-primary/15 -left-px" />
+          <span className="absolute h-1.5 w-px bg-text-primary/15 -right-px" />
 
           {/* Core center ring anchor dot */}
-          <div className="w-1 h-1 rounded-full bg-[#1E6F44] center-dot" />
+          <div className="w-1 h-1 rounded-full bg-accent-green center-dot" />
         </div>
-      </motion.div>
+      </m.div>
 
       {/* ── Floating Diagnostic HUD Tags ── */}
-      <motion.div
+      <m.div
         className="fixed flex flex-col font-mono pointer-events-none select-none text-[8px] tracking-wider"
         style={{
           left: cursorX,
@@ -196,20 +201,20 @@ const CustomCursor = () => {
         }}
       >
         {/* State Indicator */}
-        <span ref={labelRef} className="text-[#1E6F44] font-bold">
+        <span ref={labelRef} className="text-accent-green font-bold">
           [SYS_OK]
         </span>
 
         {/* Current targeted DOM Element Tag */}
-        <span ref={nodeRef} className="text-[#8C908D] mt-0.5 font-semibold">
+        <span ref={nodeRef} className="text-text-muted mt-0.5 font-semibold">
           [NODE: body]
         </span>
 
         {/* Coordinates Readout (updated via direct DOM reference) */}
-        <span className="text-[#8C908D]/65 mt-0.5">
+        <span className="text-text-muted/65 mt-0.5">
           [<span ref={coordsRef}>0, 0</span>]
         </span>
-      </motion.div>
+      </m.div>
     </div>
   );
 };

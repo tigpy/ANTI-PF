@@ -250,20 +250,20 @@ export default function CLIOverlay({ isOpen, onClose }) {
     zIndex: 99999,
     height: isMobile ? '70vh' : '55vh',
     maxHeight: isMobile ? 'none' : '550px',
-    borderBottom: isDestructMode ? '4px solid #C25E29' : '2px solid var(--border)',
-    backgroundColor: 'var(--bg-primary)',
-    boxShadow: '0px 10px 30px rgba(24,26,27,0.15)',
+    borderBottom: isDestructMode ? '4px solid var(--accent-orange)' : '2px solid var(--border-color)',
+    backgroundColor: 'var(--bg-terminal)',
+    boxShadow: '0px 10px 30px var(--shadow-color)',
     display: 'flex',
     flexDirection: 'column',
     transition: 'all 0.3s ease-in-out',
     fontFamily: 'monospace',
     fontSize: isMobile ? '11px' : '12px',
-    color: 'var(--text-primary)'
+    color: '#FAF9F6'
   };
 
   const titleBarStyle = {
-    backgroundColor: isDestructMode ? '#C25E29' : 'var(--text-primary)',
-    color: 'var(--bg-tertiary)',
+    backgroundColor: isDestructMode ? 'var(--accent-orange)' : '#14151B',
+    color: 'var(--terminal-text)',
     padding: isMobile ? '8px 12px' : '8px 16px',
     display: 'flex',
     alignItems: 'center',
@@ -288,10 +288,10 @@ export default function CLIOverlay({ isOpen, onClose }) {
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    border: '1px solid var(--border)',
-    backgroundColor: 'var(--bg-tertiary)',
+    border: '1px solid var(--border-color)',
+    backgroundColor: '#0B0C10',
     padding: isMobile ? '8px' : '12px',
-    boxShadow: isMobile ? '1.5px 1.5px 0px var(--border)' : '2.5px 2.5px 0px var(--border)',
+    boxShadow: isMobile ? '1.5px 1.5px 0px var(--border-color)' : '2.5px 2.5px 0px var(--border-color)',
     overflow: 'hidden'
   };
 
@@ -305,7 +305,7 @@ export default function CLIOverlay({ isOpen, onClose }) {
   const formStyle = {
     marginTop: '12px',
     paddingTop: '12px',
-    borderTop: '1px solid rgba(24,26,27,0.1)',
+    borderTop: '1px solid var(--border-color)',
     display: 'flex',
     alignItems: 'center'
   };
@@ -315,7 +315,7 @@ export default function CLIOverlay({ isOpen, onClose }) {
     backgroundColor: 'transparent',
     border: 'none',
     outline: 'none',
-    color: 'var(--text-primary)',
+    color: 'var(--terminal-text)',
     fontFamily: 'monospace',
     fontSize: '12px'
   };
@@ -328,11 +328,12 @@ export default function CLIOverlay({ isOpen, onClose }) {
   };
 
   const infoBoxStyle = {
-    border: '1px solid var(--border)',
-    backgroundColor: 'var(--bg-secondary)',
+    border: '1px solid var(--border-color)',
+    backgroundColor: '#14151B',
     padding: '10px',
     fontSize: '10px',
-    boxShadow: '2.5px 2.5px 0px var(--border)'
+    boxShadow: '2.5px 2.5px 0px var(--border-color)',
+    color: 'var(--terminal-text)'
   };
 
   const ctfLayerStyle = {
@@ -372,8 +373,8 @@ export default function CLIOverlay({ isOpen, onClose }) {
       <div style={titleBarStyle}>
         <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span 
-            className="w-2 h-2 rounded-full bg-[#1E6F44] animate-ping" 
-            style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: isDestructMode ? '#C25E29' : '#1E6F44' }}
+            className="w-2 h-2 rounded-full bg-accent-green animate-ping" 
+            style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: isDestructMode ? 'var(--accent-orange)' : 'var(--accent-green)' }}
           />
           {isDestructMode ? (isMobile ? '[RECOVERY_CLI]' : '[CRITICAL_SYSTEM_RECOVERY_CONSOLE]') : (isMobile ? '[SYS_CLI_DIAG]' : '[SYS_TERMINAL_DIAGNOSTICS]')}
         </span>
@@ -423,20 +424,20 @@ export default function CLIOverlay({ isOpen, onClose }) {
       <div style={panelContainerStyle}>
         {/* Terminal Logs Panel */}
         <div style={logsPanelStyle}>
-          <div ref={scrollContainerRef} style={scrollContainerStyle}>
+          <div ref={scrollContainerRef} className="logs-scrollbar" style={scrollContainerStyle}>
             {terminalLogs.map((log, index) => {
               let itemStyle = { fontFamily: 'monospace', fontSize: '11px', marginBottom: '4px' };
               if (log.startsWith('$')) {
-                itemStyle.color = '#2B6282'; // blueprint blue
+                itemStyle.color = 'var(--accent-teal)';
                 itemStyle.fontWeight = 'bold';
               } else if (log.includes('[ERROR]') || log.includes('!!!') || log.includes('CRITICAL') || log.includes('WARNING')) {
-                itemStyle.color = '#C25E29'; // orange warn
+                itemStyle.color = 'var(--accent-orange)';
                 itemStyle.fontWeight = 'bold';
               } else if (log.includes('AVAILABLE') || log.includes('SUCCESS') || log.includes('RECOVERY') || log.includes('ACTIVE')) {
-                itemStyle.color = '#1E6F44'; // green success
+                itemStyle.color = 'var(--accent-green)';
                 itemStyle.fontWeight = 'bold';
               } else {
-                itemStyle.color = '#181A1B';
+                itemStyle.color = '#FAF9F6';
               }
               return (
                 <div key={index} style={itemStyle}>
@@ -448,7 +449,7 @@ export default function CLIOverlay({ isOpen, onClose }) {
 
           {/* Form Command input */}
           <form onSubmit={handleFormSubmit} style={formStyle}>
-            <span style={{ color: '#1E6F44', fontWeight: 'bold', marginRight: '8px', fontFamily: 'monospace' }}>$</span>
+            <span style={{ color: 'var(--terminal-text)', fontWeight: 'bold', marginRight: '8px', fontFamily: 'monospace' }}>$</span>
             <input
               ref={inputRef}
               type="text"
@@ -463,14 +464,14 @@ export default function CLIOverlay({ isOpen, onClose }) {
         {/* Oscilloscope Panel (Hidden on Mobile) */}
         <div style={oscPanelStyle}>
           <div style={{ flex: 1, minHeight: '150px', display: 'flex', flexDirection: 'column' }}>
-            <Oscilloscope className="w-full h-full shadow-[2.5px_2.5px_0px_#181A1B]" />
+            <Oscilloscope className="w-full h-full shadow-[2.5px_2.5px_0px_var(--border-color)]" color="#24A060" />
           </div>
           <div style={infoBoxStyle}>
-            <div style={{ fontWeight: 'bold', borderBottom: '1px solid rgba(24,26,27,0.2)', paddingBottom: '4px', marginBottom: '6px', color: '#2B6282' }}>[WAVEFORM DIAGNOSTIC READOUT]</div>
+            <div style={{ fontWeight: 'bold', borderBottom: '1px solid var(--border-color)', paddingBottom: '4px', marginBottom: '6px', color: 'var(--accent-teal)' }}>[WAVEFORM DIAGNOSTIC READOUT]</div>
             <div>STATUS: {isDestructMode ? 'CRITICAL_ALERT' : 'ONLINE'}</div>
             <div>SAMPLE_RATE: 44.1kHz</div>
             <div>FREQUENCY: INTERACTIVE MODULATION</div>
-            <div style={{ color: isDestructMode ? '#C25E29' : '#1E6F44', fontWeight: 'bold' }}>TRIGGER: {isDestructMode ? 'SYS_CORRUPTION' : 'MOUSE_MOVE_COORDS'}</div>
+            <div style={{ color: isDestructMode ? 'var(--accent-orange)' : 'var(--accent-green)', fontWeight: 'bold' }}>TRIGGER: {isDestructMode ? 'SYS_CORRUPTION' : 'MOUSE_MOVE_COORDS'}</div>
           </div>
         </div>
       </div>

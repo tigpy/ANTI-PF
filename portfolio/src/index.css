@@ -5,19 +5,62 @@
 
 /* ── CSS Custom Properties ── */
 :root {
-  --bg-primary:    #F6F5F0;
-  --bg-secondary:  #EFECE3;
-  --bg-tertiary:   #FAF9F6;
-  --bg-card:       rgba(239, 236, 227, 0.65);
-  --accent-green:  #1E6F44;
-  --accent-blue:   #2B6282;
-  --accent-orange: #C25E29;
-  --text-primary:  #181A1B;
-  --text-secondary:#5C615D;
-  --text-muted:    #8C908D;
-  --border:        rgba(24, 26, 27, 0.12);
-  --border-subtle: rgba(24, 26, 27, 0.08);
-  --grid-dots:     rgba(24, 26, 27, 0.04);
+  --bg-primary:      #0B0C10; /* Dark Obsidian */
+  --bg-secondary:    #12131C; /* Dark Slate */
+  --bg-tertiary:     #1A1C24; /* Obsidian Gray */
+  --bg-card:         rgba(18, 19, 28, 0.65);
+  --bg-terminal:     #0B0C10; /* Obsidian Shell */
+  --text-primary:    #FAF9F6; /* Cream White */
+  --text-secondary:  #9CA09D; /* Light Slate */
+  --text-muted:      #6E7270; /* Dark Slate Muted */
+  --border-color:    rgba(250, 249, 246, 0.15);
+  --grid-dots:       rgba(250, 249, 246, 0.05);
+  --accent-green:    #24A060; /* Neon Terminal Green */
+  --accent-orange:   #D36E35; /* Neon Rust Orange */
+  --accent-teal:     #3A7CA5; /* Neon Slate Blue */
+  --shadow-color:    rgba(0, 0, 0, 0.5);
+  --glow-color:      rgba(36, 160, 96, 0.15);
+  --terminal-text:   #24A060; /* Neon Green */
+  --terminal-cursor: #24A060; /* Neon Green */
+}
+
+.light {
+  --bg-primary:      #F6F4EE; /* Warm Ivory Off-white */
+  --bg-secondary:    #EBE9DF; /* Sand Gray Surface */
+  --bg-tertiary:     #F0EDE4; /* Light Warm Gray */
+  --bg-card:         rgba(235, 233, 223, 0.65);
+  --bg-terminal:     #14151B; /* Vintage Dark CRT Casing */
+  --text-primary:    #1C1E21; /* Ink Charcoal */
+  --text-secondary:  #4E5356; /* Muted Charcoal */
+  --text-muted:      #7D8386; /* Lighter Charcoal Muted */
+  --border-color:    rgba(28, 30, 33, 0.15);
+  --grid-dots:       rgba(28, 30, 33, 0.05);
+  --accent-green:    #1E6F44; /* Vintage Tech Green */
+  --accent-orange:   #C25E29; /* Terracotta Orange */
+  --accent-teal:     #006D77; /* Muted Deep Teal */
+  --shadow-color:    rgba(28, 30, 33, 0.12);
+  --glow-color:      rgba(0, 109, 119, 0.08);
+  --terminal-text:   #24A060; /* Neon Green */
+  --terminal-cursor: #24A060; /* Neon Green */
+}
+
+@theme {
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-tertiary: var(--bg-tertiary);
+  --color-bg-card: var(--bg-card);
+  --color-bg-terminal: var(--bg-terminal);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-border-color: var(--border-color);
+  --color-accent-green: var(--accent-green);
+  --color-accent-orange: var(--accent-orange);
+  --color-accent-teal: var(--accent-teal);
+  --color-shadow-color: var(--shadow-color);
+  --color-glow-color: var(--glow-color);
+  --color-terminal-text: var(--terminal-text);
+  --color-terminal-cursor: var(--terminal-cursor);
 }
 
 /* ── Base Reset ── */
@@ -49,9 +92,32 @@ body {
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar        { width: 8px; }
-::-webkit-scrollbar-track  { background: #F6F5F0; border-left: 1px solid rgba(24, 26, 27, 0.05); }
-::-webkit-scrollbar-thumb  { background: rgba(30, 111, 68, 0.2); border-radius: 4px; border: 2px solid #F6F5F0; }
-::-webkit-scrollbar-thumb:hover { background: rgba(30, 111, 68, 0.4); }
+::-webkit-scrollbar-track  { background: var(--bg-primary); border-left: 1px solid var(--border-color); }
+::-webkit-scrollbar-thumb  { background: var(--accent-green); border-radius: 4px; border: 2px solid var(--bg-primary); }
+::-webkit-scrollbar-thumb:hover { opacity: 0.8; }
+
+/* Scrollbar overrides for dark terminals/elements to prevent light scrollbars inside them */
+.scanlines::-webkit-scrollbar-track,
+.bg-bg-terminal::-webkit-scrollbar-track,
+[style*="var(--bg-terminal)"]::-webkit-scrollbar-track,
+.logs-scrollbar::-webkit-scrollbar-track {
+  background: #0B0C10 !important;
+  border-left: 1px solid rgba(250, 249, 246, 0.15) !important;
+}
+.scanlines::-webkit-scrollbar-thumb,
+.bg-bg-terminal::-webkit-scrollbar-thumb,
+[style*="var(--bg-terminal)"]::-webkit-scrollbar-thumb,
+.logs-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--accent-green) !important;
+  border: 2px solid #0B0C10 !important;
+}
+
+/* Terminal input placeholder style for contrast */
+.bg-bg-terminal input::placeholder,
+.scanlines input::placeholder,
+.logs-scrollbar input::placeholder {
+  color: rgba(250, 249, 246, 0.4) !important;
+}
 
 /* ── Rotating ring animation (profile image) ── */
 @keyframes spin-ring {
@@ -64,8 +130,8 @@ body {
 
 /* ── Selection colour ── */
 ::selection {
-  background: rgba(30, 111, 68, 0.15);
-  color: #181A1B;
+  background: var(--accent-green);
+  color: var(--bg-primary);
 }
 
 /* ── Scanline Effect ── */
@@ -139,116 +205,26 @@ body {
   box-sizing: border-box !important;
 }
 
-/* ── Dark Mode Class Overrides ── */
-.dark {
-  --bg-primary:    #0B0C10; /* Dark Obsidian */
-  --bg-secondary:  #12131C; /* Dark Slate */
-  --bg-tertiary:   #1A1C24; /* Darker Slate */
-  --bg-card:       rgba(18, 19, 28, 0.65);
-  
-  --accent-green:  #24A060; /* Brighter terminal green for dark background */
-  --accent-blue:   #3A7CA5; /* Brighter blueprint slate blue */
-  --accent-orange: #D36E35; /* Brighter rust orange */
-  
-  --text-primary:  #FAF9F6; /* Cream white text */
-  --text-secondary:#9CA09D; /* Light grey text */
-  --text-muted:    #6E7270;  /* Muted grey text */
-  
-  --border:        rgba(250, 249, 246, 0.15);
-  --border-subtle: rgba(250, 249, 246, 0.08);
-  --grid-dots:     rgba(250, 249, 246, 0.05);
-
-  /* Selection color */
-  & ::selection {
-    background: rgba(30, 111, 68, 0.3);
-    color: #FAF9F6;
-  }
-
-  /* Scrollbar overrides */
-  &::-webkit-scrollbar-track {
-    background: var(--bg-primary);
-    border-left: 1px solid var(--border-subtle);
-  }
-  &::-webkit-scrollbar-thumb {
-    background: rgba(30, 111, 68, 0.4);
-    border: 2px solid var(--bg-primary);
-  }
-
-  /* Map arbitrary Tailwind color utility classes to CSS variables */
-  /* Background overrides */
-  .bg-\[\#f6f5f0\],
-  .bg-\[\#f6f5f0\]\/92 {
-    background-color: var(--bg-primary) !important;
-  }
-  .bg-\[\#efece3\],
-  .bg-\[\#efece3\]\/80 {
-    background-color: var(--bg-secondary) !important;
-  }
-  .bg-\[\#faf9f6\] {
-    background-color: var(--bg-tertiary) !important;
-  }
-  .bg-\[\#eae6dc\] {
-    background-color: var(--bg-secondary) !important;
-  }
-  
-  /* Text overrides */
-  .text-\[\#181a1b\] {
-    color: var(--text-primary) !important;
-  }
-  .text-\[\#5c615d\] {
-    color: var(--text-secondary) !important;
-  }
-  .text-\[\#8c908d\] {
-    color: var(--text-muted) !important;
-  }
-
-  /* Border overrides */
-  .border-\[\#181a1b\],
-  .border-\[\#181a1b\]\/15,
-  .border-\[\#181a1b\]\/12,
-  .border-\[\#181a1b\]\/10,
-  .border-\[\#181a1b\]\/5 {
-    border-color: var(--border) !important;
-  }
-  .border-t.border-\[\#181a1b\]\/10 {
-    border-top-color: var(--border-subtle) !important;
-  }
-  .border-b.border-\[\#181a1b\]\/5 {
-    border-bottom-color: var(--border-subtle) !important;
-  }
-
-  /* Custom Hover state borders and shadows */
-  .hover\:border-\[\#181a1b\]:hover {
-    border-color: var(--text-primary) !important;
-  }
-  
-  .hover\:shadow-\[4px_4px_0px_rgba\(24\,26\,27\,0\.9\)\]:hover {
-    box-shadow: 4px 4px 0px rgba(250, 249, 246, 0.9) !important;
-  }
-  .shadow-\[3px_3px_0px_rgba\(24\,26\,27\,0\.05\)\] {
-    box-shadow: 3px 3px 0px rgba(250, 249, 246, 0.05) !important;
-  }
-  .shadow-\[4px_4px_0px_rgba\(24\,26\,27\,0\.06\)\] {
-    box-shadow: 4px 4px 0px rgba(250, 249, 246, 0.06) !important;
-  }
-  .shadow-\[4px_4px_0px_rgba\(24\,26\,27\,0\.9\)\] {
-    box-shadow: 4px 4px 0px rgba(250, 249, 246, 0.9) !important;
-  }
-  .shadow-\[3px_3px_0px_\#181a1b\] {
-    box-shadow: 3px 3px 0px var(--text-primary) !important;
-  }
-  .shadow-\[4px_4px_0px_\#181a1b\] {
-    box-shadow: 4px 4px 0px var(--text-primary) !important;
-  }
-  .hover\:shadow-\[3px_3px_0px_\#181a1b\]:hover {
-    box-shadow: 3px 3px 0px var(--text-primary) !important;
-  }
-  .hover\:shadow-\[3\.5px_3\.5px_0px_\#181a1b\]:hover {
-    box-shadow: 3.5px 3.5px 0px var(--text-primary) !important;
-  }
-  .hover\:shadow-\[2px_2px_0px_\#181a1b\]:hover {
-    box-shadow: 2px 2px 0px var(--text-primary) !important;
-  }
+/* ── Content Visibility for rendering performance ── */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
 }
+
+section#hero {
+  content-visibility: visible;
+  contain-intrinsic-size: none;
+}
+
+/* ── Terminal Cursor Blink ── */
+@keyframes terminal-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-terminal-blink {
+  animation: terminal-blink 1.2s step-end infinite;
+}
+
 
 

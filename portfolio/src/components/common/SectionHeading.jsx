@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { fadeUp } from "../../animations/fadeUp";
 import DecryptText from "./DecryptText";
@@ -17,7 +17,7 @@ const SectionHeading = ({
   title,
   subtitle,
   align = "center",
-  accent = "#1E6F44",
+  accent = "var(--accent-green)",
   className = "",
 }) => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
@@ -25,7 +25,7 @@ const SectionHeading = ({
   const alignClass = align === "left" ? "text-left items-start" : "text-center items-center";
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       variants={fadeUp}
       initial="hidden"
@@ -49,7 +49,7 @@ const SectionHeading = ({
       </div>
 
       {/* Main title */}
-      <h2 className="text-3xl md:text-4xl font-bold text-[#181A1B] font-poppins leading-tight">
+      <h2 className="text-3xl md:text-4xl font-bold text-text-primary font-poppins leading-tight">
         <DecryptText text={title} />
       </h2>
 
@@ -61,7 +61,7 @@ const SectionHeading = ({
           ...(align === "center" ? { marginLeft: "auto", marginRight: "auto" } : {}),
         }}
       />
-    </motion.div>
+    </m.div>
   );
 };
 

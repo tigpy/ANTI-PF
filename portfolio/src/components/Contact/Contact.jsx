@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Mail, MapPin } from "lucide-react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
@@ -27,9 +27,9 @@ const contactInfo = [
 ];
 
 const socials = [
-  { icon: FaGithub,   label: "GitHub",     href: profileData.github,    accent: "#181A1B" },
-  { icon: FaLinkedin, label: "LinkedIn",   href: profileData.linkedin,  accent: "#2B6282" },
-  { icon: SiTryhackme,label: "TryHackMe",  href: profileData.tryhackme, accent: "#1E6F44" },
+  { icon: FaGithub,   label: "GitHub",     href: profileData.github,    accent: "var(--text-primary)" },
+  { icon: FaLinkedin, label: "LinkedIn",   href: profileData.linkedin,  accent: "var(--accent-teal)" },
+  { icon: SiTryhackme,label: "TryHackMe",  href: profileData.tryhackme, accent: "var(--accent-green)" },
 ];
 
 const Contact = () => {
@@ -51,13 +51,13 @@ const Contact = () => {
         <SectionHeading
           title="Get In Touch"
           subtitle="Contact Me"
-          accent="#1E6F44"
+          accent="var(--accent-green)"
         />
 
         <div ref={ref} className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
 
           {/* ── Left: info + terminal ── */}
-          <motion.div
+          <m.div
             variants={slideLeft}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
@@ -65,10 +65,10 @@ const Contact = () => {
           >
             {/* Heading */}
             <div>
-              <h3 className="text-[#181A1B] text-2xl font-bold font-poppins mb-3">
+              <h3 className="text-text-primary text-2xl font-bold font-poppins mb-3">
                 Let's work together
               </h3>
-              <p className="text-[#5C615D] text-sm leading-relaxed">
+              <p className="text-text-secondary text-sm leading-relaxed">
                 I'm currently open to internship opportunities, freelance projects,
                 and collaborations in cybersecurity, AI-security, and full-stack
                 development. Feel free to reach out!
@@ -76,47 +76,50 @@ const Contact = () => {
             </div>
 
             {/* Contact info items */}
-            <motion.div
+            <m.div
               variants={staggerContainer}
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
               className="flex flex-col gap-3"
             >
               {contactInfo.map(({ icon: Icon, label, value, href }) => (
-                <motion.div
+                <m.div
                   key={label}
                   variants={staggerItem}
-                  className="flex items-center gap-4 p-4 rounded-xl border border-[#181A1B]/12 transition-all duration-300 hover:border-[#1E6F44] hover:shadow-[3px_3px_0px_#181A1B]"
+                  className="flex items-center gap-4 p-4 rounded-xl border border-border-color transition-all duration-300 hover:border-accent-green hover:shadow-[3px_3px_0px_var(--text-primary)]"
                   style={{ background: "var(--bg-card)", backdropFilter: "blur(16px)" }}
                 >
                   <div
                     className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: "rgba(30,111,68,0.08)", border: "1px solid rgba(30,111,68,0.25)" }}
+                    style={{
+                      background: "color-mix(in srgb, var(--accent-green) 8%, transparent)",
+                      border: "1px solid color-mix(in srgb, var(--accent-green) 25%, transparent)"
+                    }}
                   >
-                    <Icon size={16} color="#1E6F44" />
+                    <Icon size={16} color="var(--accent-green)" />
                   </div>
                   <div>
-                    <p className="text-[#8C908D] text-xs font-mono font-bold uppercase tracking-wider">{label}</p>
+                    <p className="text-text-muted text-xs font-mono font-bold uppercase tracking-wider">{label}</p>
                     {href ? (
-                      <a href={href} className="text-[#181A1B] text-sm font-bold hover:text-[#1E6F44] transition-colors duration-200">
+                      <a href={href} className="text-text-primary text-sm font-bold hover:text-accent-green transition-colors duration-200">
                         {value}
                       </a>
                     ) : (
-                      <p className="text-[#181A1B] text-sm font-bold">{value}</p>
+                      <p className="text-text-primary text-sm font-bold">{value}</p>
                     )}
                   </div>
-                </motion.div>
+                </m.div>
               ))}
-            </motion.div>
+            </m.div>
 
             {/* Social links */}
             <div>
-              <p className="text-xs font-mono font-bold text-[#8C908D] uppercase tracking-widest mb-3">
+              <p className="text-xs font-mono font-bold text-text-muted uppercase tracking-widest mb-3">
                 Find me on
               </p>
               <div className="flex gap-3">
                 {socials.map(({ icon: Icon, label, href, accent }) => (
-                  <motion.a
+                  <m.a
                     key={label}
                     href={href}
                     target="_blank"
@@ -124,21 +127,11 @@ const Contact = () => {
                     aria-label={label}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-11 h-11 flex items-center justify-center rounded-xl border border-[#181A1B]/12 text-[#5C615D] transition-all duration-300 hover:bg-[#EAE6DC]"
-                    style={{ background: "var(--bg-card)" }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = accent;
-                      e.currentTarget.style.borderColor = "#181A1B";
-                      e.currentTarget.style.boxShadow = "2px 2px 0px #181A1B";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = "";
-                      e.currentTarget.style.borderColor = "";
-                      e.currentTarget.style.boxShadow = "";
-                    }}
+                    className="w-11 h-11 flex items-center justify-center rounded-xl border border-border-color text-text-secondary transition-all duration-300 hover:text-[var(--social-accent)] hover:border-text-primary hover:shadow-[2px_2px_0px_var(--text-primary)] hover:bg-bg-secondary cursor-pointer"
+                    style={{ background: "var(--bg-card)", "--social-accent": accent }}
                   >
                     <Icon size={18} />
-                  </motion.a>
+                  </m.a>
                 ))}
               </div>
             </div>
@@ -148,25 +141,20 @@ const Contact = () => {
               title="aryan@contact ~ "
               lines={contactTerminalLines}
             />
-          </motion.div>
+          </m.div>
 
           {/* ── Right: contact form ── */}
-          <motion.div
+          <m.div
             variants={slideRight}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
-            className="p-8 rounded-3xl border-2 border-[#181A1B]/15"
-            style={{
-              background: "rgba(239, 236, 227, 0.7)",
-              backdropFilter: "blur(20px)",
-              boxShadow: "4px 4px 0px #181A1B"
-            }}
+            className="p-8 rounded-3xl border-2 border-border-color bg-bg-card backdrop-blur-md shadow-[4px_4px_0px_var(--border-color)]"
           >
-            <p className="text-xs font-mono font-bold text-[#1E6F44] tracking-widest uppercase mb-6">
+            <p className="text-xs font-mono font-bold text-accent-green tracking-widest uppercase mb-6">
               Send a message
             </p>
             <ContactForm />
-          </motion.div>
+          </m.div>
         </div>
       </Container>
     </section>

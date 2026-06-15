@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { Menu, X, Terminal, Volume2, VolumeX, Sun, Moon } from "lucide-react";
 import { NAV_LINKS } from "../../constants";
 import { profileData } from "../../data/profileData";
@@ -17,18 +17,20 @@ const Navbar = () => {
   const [audioEnabled, setAudioEnabled] = useState(cyberSynth.isEnabled());
   const [theme, setTheme] = useState(() => {
     if (typeof window !== "undefined") {
-      return localStorage.getItem("theme") || "light";
+      return localStorage.getItem("theme") || "dark";
     }
-    return "light";
+    return "dark";
   });
 
   // Apply active theme to document body/html element
   useEffect(() => {
     const root = window.document.documentElement;
-    if (theme === "dark") {
-      root.classList.add("dark");
-    } else {
+    if (theme === "light") {
+      root.classList.add("light");
       root.classList.remove("dark");
+    } else {
+      root.classList.add("dark");
+      root.classList.remove("light");
     }
     localStorage.setItem("theme", theme);
   }, [theme]);
@@ -101,7 +103,7 @@ const Navbar = () => {
 
   return (
     <>
-      <motion.header
+      <m.header
         initial={{ y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -111,15 +113,15 @@ const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
           {/* Logo */}
-          <motion.a
+          <m.a
             href="#hero"
             onClick={(e) => { e.preventDefault(); handleNavClick("#hero"); }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             className="flex items-center gap-3 group"
           >
-            <div className="w-12 h-12 rounded-2xl overflow-hidden border border-[#1E6F44]/30
-                shadow-[2px_2px_0px_#181A1B]
+            <div className="w-12 h-12 rounded-2xl overflow-hidden border border-accent-green/30
+                shadow-[2px_2px_0px_var(--text-primary)]
                 flex items-center justify-center">
               <img
                 src="/favicon.jpg"
@@ -127,36 +129,36 @@ const Navbar = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <span className="hidden sm:block text-[#181A1B] font-bold font-poppins text-sm group-hover:text-[#1E6F44] transition-colors duration-300">
+            <span className="hidden sm:block text-text-primary font-bold font-poppins text-sm group-hover:text-accent-green transition-colors duration-300">
               {profileData.name}
             </span>
-          </motion.a>
+          </m.a>
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-1">
             {NAV_LINKS.map((link) => {
               const isActive = activeSection === link.href.replace("#", "");
               return (
-                <motion.a
+                <m.a
                   key={link.href}
                   href={link.href}
                   onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
                   whileHover={{ y: -1 }}
                   className={`relative px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-300 ${
                     isActive
-                      ? "text-[#1E6F44]"
-                      : "text-[#5C615D] hover:text-[#181A1B]"
+                      ? "text-accent-green"
+                      : "text-text-secondary hover:text-text-primary"
                   }`}
                 >
                   <DecryptText text={link.label} />
                   {/* Active indicator dot */}
                   {isActive && (
-                    <motion.span
+                    <m.span
                       layoutId="nav-indicator"
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#1E6F44]"
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-accent-green"
                     />
                   )}
-                </motion.a>
+                </m.a>
               );
             })}
           </nav>
@@ -166,10 +168,10 @@ const Navbar = () => {
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className={`p-2 rounded-xl border border-[#181A1B] transition-all duration-300 flex items-center gap-1.5 font-mono text-xs font-bold ${
+              className={`p-2 rounded-xl border border-text-primary transition-all duration-300 flex items-center gap-1.5 font-mono text-xs font-bold ${
                 theme === "dark"
-                  ? "bg-[#24A060] text-[#FAF9F6] shadow-[2.5px_2.5px_0px_#181A1B]"
-                  : "bg-[#EFECE3] text-[#181A1B] hover:bg-[#FAF9F6]"
+                  ? "bg-accent-green text-bg-primary shadow-[2.5px_2.5px_0px_var(--text-primary)]"
+                  : "bg-bg-secondary text-text-primary hover:bg-bg-tertiary"
               }`}
               title="Toggle Light/Dark Theme"
             >
@@ -180,10 +182,10 @@ const Navbar = () => {
             {/* Audio Synth Toggle */}
             <button
               onClick={toggleAudio}
-              className={`p-2 rounded-xl border border-[#181A1B] transition-all duration-300 flex items-center gap-1.5 font-mono text-xs font-bold ${
+              className={`p-2 rounded-xl border border-text-primary transition-all duration-300 flex items-center gap-1.5 font-mono text-xs font-bold ${
                 audioEnabled
-                  ? "bg-[#1E6F44] text-[#F6F5F0] shadow-[2.5px_2.5px_0px_#181A1B]"
-                  : "bg-[#EFECE3] text-[#181A1B] hover:bg-[#FAF9F6]"
+                  ? "bg-accent-green text-bg-primary shadow-[2.5px_2.5px_0px_var(--text-primary)]"
+                  : "bg-bg-secondary text-text-primary hover:bg-bg-tertiary"
               }`}
               title="Toggle Audio Feedback"
             >
@@ -194,10 +196,10 @@ const Navbar = () => {
             {/* CLI Console Shell Trigger */}
             <button
               onClick={() => setCliOpen(!cliOpen)}
-              className={`p-2 rounded-xl border border-[#181A1B] transition-all duration-300 flex items-center gap-1.5 font-mono text-xs font-bold ${
+              className={`p-2 rounded-xl border border-text-primary transition-all duration-300 flex items-center gap-1.5 font-mono text-xs font-bold ${
                 cliOpen
-                  ? "bg-[#2B6282] text-[#F6F5F0] shadow-[2.5px_2.5px_0px_#181A1B]"
-                  : "bg-[#EFECE3] text-[#181A1B] hover:bg-[#FAF9F6]"
+                  ? "bg-accent-teal text-bg-primary shadow-[2.5px_2.5px_0px_var(--text-primary)]"
+                  : "bg-bg-secondary text-text-primary hover:bg-bg-tertiary"
               }`}
               title="Open Diagnostic Console & CTF Challenge"
             >
@@ -205,36 +207,36 @@ const Navbar = () => {
               <span>SHELL [CTF]</span>
             </button>
 
-            <motion.a
+            <m.a
               href={profileData.resumeLink}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="px-5 py-2 text-sm font-bold rounded-xl bg-[#181A1B] text-[#F6F5F0] hover:bg-[#1E6F44] hover:shadow-[3px_3px_0px_rgba(24,26,27,0.3)] transition-all duration-300"
+              className="px-5 py-2 text-sm font-bold rounded-xl bg-text-primary text-bg-primary hover:bg-accent-green hover:shadow-[3px_3px_0px_var(--border-color)] transition-all duration-300"
             >
               Resume
-            </motion.a>
+            </m.a>
           </div>
 
           {/* Mobile hamburger */}
-          <motion.button
+          <m.button
             whileTap={{ scale: 0.9 }}
             onClick={() => setMobileOpen((v) => !v)}
-            className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-[#EFECE3] border border-[#181A1B]/15 text-[#5C615D] hover:text-[#181A1B] transition-colors"
+            className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-bg-secondary border border-border-color text-text-secondary hover:text-text-primary transition-colors"
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-          </motion.button>
+          </m.button>
         </div>
-      </motion.header>
+      </m.header>
 
       {/* Mobile drawer */}
       <AnimatePresence>
         {mobileOpen && (
           <>
             {/* Backdrop */}
-            <motion.div
+            <m.div
               key="backdrop"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -244,26 +246,26 @@ const Navbar = () => {
             />
 
             {/* Drawer */}
-            <motion.div
+            <m.div
               key="drawer"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 28, stiffness: 260 }}
               className="fixed top-0 right-0 bottom-0 z-50 w-72 md:hidden flex flex-col"
-              style={{ background: "var(--bg-primary)", borderLeft: "2px solid var(--border)" }}
+              style={{ background: "var(--bg-primary)", borderLeft: "2px solid var(--border-color)" }}
             >
               {/* Drawer header */}
-              <div className="flex items-center justify-between px-6 py-5 border-b border-[#181A1B]/10">
+              <div className="flex items-center justify-between px-6 py-5 border-b border-border-color/60">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#181A1B] flex items-center justify-center">
-                    <span className="text-[#F6F5F0] font-bold text-xs font-poppins">AS</span>
+                  <div className="w-8 h-8 rounded-lg bg-text-primary flex items-center justify-center">
+                    <span className="text-bg-primary font-bold text-xs font-poppins">AS</span>
                   </div>
-                  <span className="text-[#181A1B] font-bold text-sm font-poppins">Aryan Singh</span>
+                  <span className="text-text-primary font-bold text-sm font-poppins">Aryan Singh</span>
                 </div>
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="w-8 h-8 flex items-center justify-center rounded-lg bg-[#EFECE3] text-[#5C615D] hover:text-[#181A1B] transition-colors"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg bg-bg-secondary text-text-secondary hover:text-text-primary transition-colors"
                 >
                   <X size={16} />
                 </button>
@@ -274,7 +276,7 @@ const Navbar = () => {
                 {NAV_LINKS.map((link, i) => {
                   const isActive = activeSection === link.href.replace("#", "");
                   return (
-                    <motion.a
+                    <m.a
                       key={link.href}
                       href={link.href}
                       initial={{ opacity: 0, x: 20 }}
@@ -283,28 +285,28 @@ const Navbar = () => {
                       onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
                       className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all duration-200 ${
                         isActive
-                          ? "bg-[#1E6F44]/10 text-[#1E6F44] border border-[#1E6F44]/20"
-                          : "text-[#5C615D] hover:bg-[#EFECE3] hover:text-[#181A1B]"
+                          ? "bg-accent-green/10 text-accent-green border border-accent-green/20"
+                          : "text-text-secondary hover:bg-bg-secondary hover:text-text-primary"
                       }`}
                     >
-                      <span className="text-xs font-mono text-[#1E6F44]/40">
+                      <span className="text-xs font-mono text-accent-green/40">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       {link.label}
-                    </motion.a>
+                    </m.a>
                   );
                 })}
               </nav>
 
               {/* Mobile controls */}
-              <div className="px-4 py-4 border-t border-[#181A1B]/10 space-y-3">
+              <div className="px-4 py-4 border-t border-border-color/60 space-y-3">
                 {/* Mobile Theme Toggle */}
                 <button
                   onClick={toggleTheme}
-                  className={`w-full py-2.5 rounded-xl border border-[#181A1B] flex items-center justify-center gap-2 font-mono text-xs font-bold ${
+                  className={`w-full py-2.5 rounded-xl border border-text-primary flex items-center justify-center gap-2 font-mono text-xs font-bold ${
                     theme === "dark"
-                      ? "bg-[#24A060] text-[#FAF9F6]"
-                      : "bg-[#EFECE3] text-[#181A1B]"
+                      ? "bg-accent-green text-bg-primary"
+                      : "bg-bg-secondary text-text-primary"
                   }`}
                 >
                   {theme === "light" ? <Moon size={14} /> : <Sun size={14} />}
@@ -313,10 +315,10 @@ const Navbar = () => {
 
                 <button
                   onClick={toggleAudio}
-                  className={`w-full py-2.5 rounded-xl border border-[#181A1B] flex items-center justify-center gap-2 font-mono text-xs font-bold ${
+                  className={`w-full py-2.5 rounded-xl border border-text-primary flex items-center justify-center gap-2 font-mono text-xs font-bold ${
                     audioEnabled
-                      ? "bg-[#1E6F44] text-[#F6F5F0]"
-                      : "bg-[#EFECE3] text-[#181A1B]"
+                      ? "bg-accent-green text-bg-primary"
+                      : "bg-bg-secondary text-text-primary"
                   }`}
                 >
                   {audioEnabled ? <Volume2 size={14} /> : <VolumeX size={14} />}
@@ -328,7 +330,7 @@ const Navbar = () => {
                     setMobileOpen(false);
                     setCliOpen(true);
                   }}
-                  className="w-full py-2.5 rounded-xl border border-[#181A1B] bg-[#EFECE3] text-[#181A1B] flex items-center justify-center gap-2 font-mono text-xs font-bold hover:bg-[#FAF9F6]"
+                  className="w-full py-2.5 rounded-xl border border-text-primary bg-bg-secondary text-text-primary flex items-center justify-center gap-2 font-mono text-xs font-bold hover:bg-bg-tertiary"
                 >
                   <Terminal size={14} />
                   <span>DIAGNOSTIC SHELL [CTF]</span>
@@ -341,12 +343,12 @@ const Navbar = () => {
                   href={profileData.resumeLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full text-center px-5 py-3 text-sm font-bold rounded-xl bg-[#181A1B] text-[#F6F5F0] hover:bg-[#1E6F44] hover:shadow-[3px_3px_0px_rgba(24,26,27,0.3)] transition-all duration-300"
+                  className="block w-full text-center px-5 py-3 text-sm font-bold rounded-xl bg-text-primary text-bg-primary hover:bg-accent-green hover:shadow-[3px_3px_0px_var(--border-color)] transition-all duration-300"
                 >
                   Download Resume
                 </a>
               </div>
-            </motion.div>
+            </m.div>
           </>
         )}
       </AnimatePresence>

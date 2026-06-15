@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 /**
  * SocialButton — icon-only or icon+label social link button.
@@ -28,7 +28,7 @@ const SocialButton = ({
   const { wrapper, icon: iconSize } = sizeMap[size];
 
   return (
-    <motion.a
+    <m.a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
@@ -57,7 +57,7 @@ const SocialButton = ({
       {showLabel && (
         <span className="text-sm font-medium text-[#181A1B]">{label}</span>
       )}
-    </motion.a>
+    </m.a>
   );
 };
 
