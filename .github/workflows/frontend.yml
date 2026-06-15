@@ -12,7 +12,7 @@ jobs:
 build-push-deploy:
 runs-on: ubuntu-latest
 
-```
+
 permissions:
   contents: read
   packages: write
@@ -57,4 +57,3 @@ steps:
   - name: Restart deployment
     run: |
       oc rollout restart deployment/anti-pf-frontend
-```
