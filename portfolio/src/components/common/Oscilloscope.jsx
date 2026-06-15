@@ -103,10 +103,10 @@ export default function Oscilloscope({ className = '', color = '#1E6F44' }) {
         ctx.beginPath();
 
         const centerY = height / 2;
+        const baseFreq = 0.02;
 
         for (let x = 0; x < width; x++) {
           // Compose multiple sine waves + noise based on activity
-          const baseFreq = 0.02;
           const activeFreq = 0.05 + activity * 0.01;
           const amplitude = 3 + activity * 1.5 + Math.sin(phase * 0.1) * 2;
           
