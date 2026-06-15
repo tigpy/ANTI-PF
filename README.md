@@ -13,7 +13,7 @@ A modern cybersecurity-themed portfolio website built with React and Node.js and
 
 🔗 **Portfolio Website**
 
-https://anti-pf-artx-3002-dev.apps.rm2.thpm.p1.openshiftapps.com
+https://anti-pf-frontend-artx-3002-dev.apps.rm2.thpm.p1.openshiftapps.com/
 
 *(Will be migrated to `https://aryansec.eu.org` after domain approval.)*
 
