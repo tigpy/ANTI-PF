@@ -47,8 +47,8 @@ const ProjectModal = ({ project, onClose }) => {
           onClick={(e) => e.stopPropagation()}
           className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-[#181A1B]"
           style={{
-            background: "#FAF9F6",
-            boxShadow: "4px 4px 0px #181A1B",
+            background: "var(--bg-tertiary)",
+            boxShadow: "4px 4px 0px var(--text-primary)",
           }}
         >
           {/* Top accent bar */}

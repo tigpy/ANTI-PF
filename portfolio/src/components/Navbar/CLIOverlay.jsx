@@ -250,20 +250,20 @@ export default function CLIOverlay({ isOpen, onClose }) {
     zIndex: 99999,
     height: isMobile ? '70vh' : '55vh',
     maxHeight: isMobile ? 'none' : '550px',
-    borderBottom: isDestructMode ? '4px solid #C25E29' : '2px solid #181A1B',
-    backgroundColor: '#F6F5F0',
+    borderBottom: isDestructMode ? '4px solid #C25E29' : '2px solid var(--border)',
+    backgroundColor: 'var(--bg-primary)',
     boxShadow: '0px 10px 30px rgba(24,26,27,0.15)',
     display: 'flex',
     flexDirection: 'column',
     transition: 'all 0.3s ease-in-out',
     fontFamily: 'monospace',
     fontSize: isMobile ? '11px' : '12px',
-    color: '#181A1B'
+    color: 'var(--text-primary)'
   };
 
   const titleBarStyle = {
-    backgroundColor: isDestructMode ? '#C25E29' : '#181A1B',
-    color: '#FAF9F6',
+    backgroundColor: isDestructMode ? '#C25E29' : 'var(--text-primary)',
+    color: 'var(--bg-tertiary)',
     padding: isMobile ? '8px 12px' : '8px 16px',
     display: 'flex',
     alignItems: 'center',
@@ -288,10 +288,10 @@ export default function CLIOverlay({ isOpen, onClose }) {
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    border: '1px solid #181A1B',
-    backgroundColor: '#FAF9F6',
+    border: '1px solid var(--border)',
+    backgroundColor: 'var(--bg-tertiary)',
     padding: isMobile ? '8px' : '12px',
-    boxShadow: isMobile ? '1.5px 1.5px 0px #181A1B' : '2.5px 2.5px 0px #181A1B',
+    boxShadow: isMobile ? '1.5px 1.5px 0px var(--border)' : '2.5px 2.5px 0px var(--border)',
     overflow: 'hidden'
   };
 
@@ -315,7 +315,7 @@ export default function CLIOverlay({ isOpen, onClose }) {
     backgroundColor: 'transparent',
     border: 'none',
     outline: 'none',
-    color: '#181A1B',
+    color: 'var(--text-primary)',
     fontFamily: 'monospace',
     fontSize: '12px'
   };
@@ -328,17 +328,17 @@ export default function CLIOverlay({ isOpen, onClose }) {
   };
 
   const infoBoxStyle = {
-    border: '1px solid #181A1B',
-    backgroundColor: '#EFECE3',
+    border: '1px solid var(--border)',
+    backgroundColor: 'var(--bg-secondary)',
     padding: '10px',
     fontSize: '10px',
-    boxShadow: '2.5px 2.5px 0px #181A1B'
+    boxShadow: '2.5px 2.5px 0px var(--border)'
   };
 
   const ctfLayerStyle = {
     position: 'fixed',
     inset: 0,
-    backgroundColor: '#181A1B',
+    backgroundColor: 'var(--text-primary)',
     color: '#1E6F44',
     fontFamily: 'monospace',
     zIndex: 100001,
@@ -509,8 +509,8 @@ export default function CLIOverlay({ isOpen, onClose }) {
                 flexDirection: 'column',
                 gap: '12px',
                 maxWidth: '450px',
-                backgroundColor: '#FAF9F6',
-                color: '#181A1B',
+                backgroundColor: 'var(--bg-tertiary)',
+                color: 'var(--text-primary)',
                 border: '4px solid #1E6F44',
                 padding: isMobile ? '16px' : '24px',
                 boxShadow: '8px 8px 0px #1E6F44',

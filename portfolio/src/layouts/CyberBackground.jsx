@@ -104,8 +104,10 @@ const CyberBackground = () => {
     const draw = () => {
       ctx.clearRect(0, 0, W, H);
 
-      // 1. Blueprint Grid Lines (very faint sand-charcoal)
-      ctx.strokeStyle = "rgba(24, 26, 27, 0.015)";
+      const isDark = document.documentElement.classList.contains('dark');
+
+      // 1. Blueprint Grid Lines (very faint sand-charcoal in light / light grey in dark)
+      ctx.strokeStyle = isDark ? "rgba(250, 249, 246, 0.018)" : "rgba(24, 26, 27, 0.015)";
       ctx.lineWidth = 0.5;
       for (let x = 0; x < W; x += GRID) {
         ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
@@ -220,7 +222,8 @@ const CyberBackground = () => {
         if (f.y > H) { f.y = 0; f.x = Math.random() * W; }
 
         ctx.font = `${f.size}px 'JetBrains Mono', monospace`;
-        ctx.fillStyle = `rgba(24, 26, 27, ${f.alpha})`;
+        const charColorBase = isDark ? "250, 249, 246" : "24, 26, 27";
+        ctx.fillStyle = `rgba(${charColorBase}, ${f.alpha})`;
         ctx.fillText(f.char, f.x, f.y);
       });
 

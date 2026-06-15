@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Terminal, Volume2, VolumeX } from "lucide-react";
+import { Menu, X, Terminal, Volume2, VolumeX, Sun, Moon } from "lucide-react";
 import { NAV_LINKS } from "../../constants";
 import { profileData } from "../../data/profileData";
 import { glass } from "../../styles/glass";
@@ -15,6 +15,30 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState("hero");
   const [cliOpen, setCliOpen] = useState(false);
   const [audioEnabled, setAudioEnabled] = useState(cyberSynth.isEnabled());
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("theme") || "light";
+    }
+    return "light";
+  });
+
+  // Apply active theme to document body/html element
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (theme === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === "light" ? "dark" : "light";
+    setTheme(nextTheme);
+    addSnifferLog(`[SYS] THEME TOGGLED: ${nextTheme.toUpperCase()}`);
+    cyberSynth.playChime();
+  };
 
   // Detect scroll to apply glass background
   useEffect(() => {
@@ -139,6 +163,20 @@ const Navbar = () => {
 
           {/* Desktop CTA & Controls */}
           <div className="hidden md:flex items-center gap-3">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className={`p-2 rounded-xl border border-[#181A1B] transition-all duration-300 flex items-center gap-1.5 font-mono text-xs font-bold ${
+                theme === "dark"
+                  ? "bg-[#24A060] text-[#FAF9F6] shadow-[2.5px_2.5px_0px_#181A1B]"
+                  : "bg-[#EFECE3] text-[#181A1B] hover:bg-[#FAF9F6]"
+              }`}
+              title="Toggle Light/Dark Theme"
+            >
+              {theme === "light" ? <Moon size={14} /> : <Sun size={14} />}
+              <span>{theme === "light" ? "DARK" : "LIGHT"}</span>
+            </button>
+
             {/* Audio Synth Toggle */}
             <button
               onClick={toggleAudio}
@@ -213,7 +251,7 @@ const Navbar = () => {
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 28, stiffness: 260 }}
               className="fixed top-0 right-0 bottom-0 z-50 w-72 md:hidden flex flex-col"
-              style={{ background: "#F6F5F0", borderLeft: "2px solid #181A1B" }}
+              style={{ background: "var(--bg-primary)", borderLeft: "2px solid var(--border)" }}
             >
               {/* Drawer header */}
               <div className="flex items-center justify-between px-6 py-5 border-b border-[#181A1B]/10">
@@ -260,6 +298,19 @@ const Navbar = () => {
 
               {/* Mobile controls */}
               <div className="px-4 py-4 border-t border-[#181A1B]/10 space-y-3">
+                {/* Mobile Theme Toggle */}
+                <button
+                  onClick={toggleTheme}
+                  className={`w-full py-2.5 rounded-xl border border-[#181A1B] flex items-center justify-center gap-2 font-mono text-xs font-bold ${
+                    theme === "dark"
+                      ? "bg-[#24A060] text-[#FAF9F6]"
+                      : "bg-[#EFECE3] text-[#181A1B]"
+                  }`}
+                >
+                  {theme === "light" ? <Moon size={14} /> : <Sun size={14} />}
+                  <span>{theme === "light" ? "SWITCH TO DARK" : "SWITCH TO LIGHT"}</span>
+                </button>
+
                 <button
                   onClick={toggleAudio}
                   className={`w-full py-2.5 rounded-xl border border-[#181A1B] flex items-center justify-center gap-2 font-mono text-xs font-bold ${

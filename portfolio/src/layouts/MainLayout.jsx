@@ -123,7 +123,7 @@ const MainLayout = ({ children }) => {
   }
 
   return (
-    <div className={containerClassName} style={{ background: "#F6F5F0" }}>
+    <div className={containerClassName} style={{ background: "var(--bg-primary)" }}>
       {/* ── BIOS Bootloader sequence ── */}
       {!bootComplete && (
         <BootLoader onComplete={() => setBootComplete(true)} />
