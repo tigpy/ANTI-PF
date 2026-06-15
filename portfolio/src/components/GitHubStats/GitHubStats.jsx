@@ -60,7 +60,7 @@ const GitHubStats = () => {
                 variants={staggerItem}
                 whileHover={{ y: -4 }}
                 className="flex items-center gap-3 p-4 rounded-2xl border border-[#181A1B]/12 transition-all duration-300 hover:border-[#1E6F44] hover:shadow-[3px_3px_0px_#181A1B]"
-                style={{ background: "rgba(239, 236, 227, 0.65)", backdropFilter: "blur(20px)" }}
+                style={{ background: "var(--bg-card)", backdropFilter: "blur(20px)" }}
               >
                 <div
                   className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
@@ -87,7 +87,7 @@ const GitHubStats = () => {
             <motion.div
               variants={staggerItem}
               className="rounded-2xl border-2 border-[#181A1B]/15 overflow-hidden p-1 transition-all duration-300 hover:border-[#1E6F44] hover:shadow-[4px_4px_0px_#181A1B]"
-              style={{ background: "rgba(239, 236, 227, 0.7)", backdropFilter: "blur(20px)" }}
+              style={{ background: "var(--bg-card)", backdropFilter: "blur(20px)" }}
             >
               <img
                 src={statsUrl}
@@ -101,7 +101,7 @@ const GitHubStats = () => {
             <motion.div
               variants={staggerItem}
               className="rounded-2xl border-2 border-[#181A1B]/15 overflow-hidden p-1 transition-all duration-300 hover:border-[#2B6282] hover:shadow-[4px_4px_0px_#181A1B]"
-              style={{ background: "rgba(239, 236, 227, 0.7)", backdropFilter: "blur(20px)" }}
+              style={{ background: "var(--bg-card)", backdropFilter: "blur(20px)" }}
             >
               <img
                 src={langsUrl}
@@ -119,7 +119,7 @@ const GitHubStats = () => {
             animate={inView ? "visible" : "hidden"}
             transition={{ delay: 0.3 }}
             className="rounded-2xl border-2 border-[#181A1B]/15 overflow-hidden p-1 transition-all duration-300 hover:border-[#1E6F44] hover:shadow-[4px_4px_0px_#181A1B]"
-            style={{ background: "rgba(239, 236, 227, 0.7)", backdropFilter: "blur(20px)" }}
+            style={{ background: "var(--bg-card)", backdropFilter: "blur(20px)" }}
           >
             <img
               src={streakUrl}

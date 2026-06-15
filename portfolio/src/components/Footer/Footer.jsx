@@ -58,7 +58,7 @@ const Footer = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="w-9 h-9 flex items-center justify-center rounded-xl border border-[#181A1B]/12 text-[#5C615D] transition-all duration-300"
-                  style={{ background: "rgba(239,236,227,0.65)" }}
+                  style={{ background: "var(--bg-card)" }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.color = accent;
                     e.currentTarget.style.borderColor = "#181A1B";

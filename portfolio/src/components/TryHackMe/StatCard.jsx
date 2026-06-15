@@ -9,7 +9,7 @@ const StatCard = ({ icon: Icon, label, value, accent = "#1E6F44", delay = 0 }) =
       transition={{ duration: 0.25, ease: "easeOut" }}
       className="flex flex-col items-center text-center p-6 rounded-2xl border border-[#181A1B]/12 transition-all duration-300 hover:shadow-[3.5px_3.5px_0px_#181A1B] group"
       style={{
-        background: "rgba(239, 236, 227, 0.65)",
+        background: "var(--bg-card)",
         backdropFilter: "blur(20px)",
         borderColor: "rgba(24, 26, 27, 0.12)",
       }}

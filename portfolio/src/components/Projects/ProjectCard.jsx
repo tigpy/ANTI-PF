@@ -25,7 +25,7 @@ const ProjectCard = ({ project, onOpenModal }) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className="relative flex flex-col rounded-3xl border-2 border-[#181A1B]/15 overflow-hidden group transition-all duration-300 hover:border-[#1E6F44] hover:shadow-[4px_4px_0px_#181A1B] h-full"
-        style={{ background: "rgba(239, 236, 227, 0.7)", backdropFilter: "blur(20px)" }}
+        style={{ background: "var(--bg-card)", backdropFilter: "blur(20px)" }}
       >
         {/* Top accent bar */}
         <div

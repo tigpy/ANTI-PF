@@ -103,7 +103,7 @@ const TryHackMe = () => {
               {/* Description */}
               <div
                 className="p-6 rounded-2xl border border-[#181A1B]/12"
-                style={{ background: "rgba(239, 236, 227, 0.65)", backdropFilter: "blur(20px)" }}
+                style={{ background: "var(--bg-card)", backdropFilter: "blur(20px)" }}
               >
                 <div className="flex items-center gap-2 mb-3">
                   <Terminal size={16} className="text-[#1E6F44]" />
@@ -122,7 +122,7 @@ const TryHackMe = () => {
               {/* Focus areas */}
               <div
                 className="p-6 rounded-2xl border border-[#181A1B]/12"
-                style={{ background: "rgba(239, 236, 227, 0.65)", backdropFilter: "blur(20px)" }}
+                style={{ background: "var(--bg-card)", backdropFilter: "blur(20px)" }}
               >
                 <p className="text-xs font-mono font-bold text-[#8C908D] tracking-widest uppercase mb-4">
                   Focus Areas

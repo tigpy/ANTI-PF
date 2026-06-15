@@ -21,7 +21,7 @@ const CertCard = ({ cert, onOpenLightbox }) => {
         variants={staggerItem}
         {...cardHoverProps}
         className="relative flex flex-col rounded-2xl border border-[#181A1B]/12 overflow-hidden transition-all duration-300 hover:border-[#1E6F44] hover:shadow-[3px_3px_0px_#181A1B] group h-full"
-        style={{ background: "rgba(239, 236, 227, 0.65)", backdropFilter: "blur(20px)" }}
+        style={{ background: "var(--bg-card)", backdropFilter: "blur(20px)" }}
       >
         {/* Top accent bar */}
         <div
