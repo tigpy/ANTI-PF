@@ -31,6 +31,12 @@ export default function BootLoader({ onComplete }) {
     'DECRYPTING PORTFOLIO DATA...'
   ];
 
+  const onCompleteRef = useRef(onComplete);
+  
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
+
   const skipBoot = () => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
@@ -39,7 +45,7 @@ export default function BootLoader({ onComplete }) {
     cyberSynth.playChime();
     safeSessionStorage.setItem('cyber_booted', 'true');
     setTimeout(() => {
-      onComplete();
+      onCompleteRef.current();
     }, 600); // match fade transition
   };
 
@@ -47,7 +53,7 @@ export default function BootLoader({ onComplete }) {
     // Check if user has already seen the boot screen in this session
     const hasBooted = safeSessionStorage.getItem('cyber_booted') === 'true';
     if (hasBooted) {
-      onComplete();
+      onCompleteRef.current();
       return;
     }
 
@@ -56,11 +62,12 @@ export default function BootLoader({ onComplete }) {
       cyberSynth.playBoot();
     }, 100);
 
-    let currentLineIndex = 0;
+    let lineCount = 0;
     intervalRef.current = setInterval(() => {
-      if (currentLineIndex < BOOT_LOGS.length) {
-        setLogs((prev) => [...prev, BOOT_LOGS[currentLineIndex]]);
-        currentLineIndex++;
+      if (lineCount < BOOT_LOGS.length) {
+        const nextLine = BOOT_LOGS[lineCount];
+        setLogs((prev) => [...prev, nextLine]);
+        lineCount++;
         
         // Small tick sound for line write
         cyberSynth.playTick();
@@ -75,7 +82,7 @@ export default function BootLoader({ onComplete }) {
           setIsDone(true);
           safeSessionStorage.setItem('cyber_booted', 'true');
           setTimeout(() => {
-            onComplete();
+            onCompleteRef.current();
           }, 600);
         }, 300);
       }
@@ -94,7 +101,7 @@ export default function BootLoader({ onComplete }) {
       }
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [onComplete]);
+  }, []);
 
   // If already booted in session, don't render anything
   if (typeof window !== 'undefined' && safeSessionStorage.getItem('cyber_booted') === 'true') {
@@ -111,7 +118,7 @@ export default function BootLoader({ onComplete }) {
       <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.12)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02))] bg-[size:100%_4px,3px_100%]" />
       
       {/* Scrollable BIOS log stream */}
-      <div ref={scrollRef} className="flex-1 overflow-y-auto max-w-2xl scrollbar-none space-y-1">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto max-w-2xl scrollbar-none space-y-1 whitespace-pre-wrap">
         {logs.map((log, index) => {
           let colorClass = 'text-[#FAF9F6]'; // default cream
           if (log.includes('[READY]') || log.includes('[DETECTED]') || log.includes('SUCCESSFUL') || log.includes('OK')) {
