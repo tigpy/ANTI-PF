@@ -44,15 +44,24 @@ jobs:
           sudo mv oc /usr/local/bin/
 
       - name: Login to OpenShift
+        id: openshift_login
+        continue-on-error: true
         run: |
           oc login \
             --token=${{ secrets.OPENSHIFT_TOKEN }} \
             --server=${{ secrets.OPENSHIFT_SERVER }}
 
       - name: Select project
+        if: steps.openshift_login.outcome == 'success'
         run: |
           oc project ${{ secrets.OPENSHIFT_NAMESPACE }}
 
       - name: Restart deployment
+        if: steps.openshift_login.outcome == 'success'
         run: |
           oc rollout restart deployment/anti-pf-frontend
+
+      - name: Warn if OpenShift login failed
+        if: steps.openshift_login.outcome != 'success'
+        run: |
+          echo "::warning::OpenShift login failed. OPENSHIFT_TOKEN may be invalid or expired; image was still built and pushed."
