@@ -5,27 +5,37 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aryan Singh</title>
-    
+
     <!-- Fonts Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
+
     <!-- Preload Critical Assets -->
-    <link rel="preload" href="/assets/profile/profile.webp" as="image" type="image/webp" fetchpriority="high" />
+    <link
+      rel="preload"
+      href="/assets/profile/profile.webp"
+      as="image"
+      type="image/webp"
+      fetchpriority="high"
+    />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74LHJ36TX9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-74LHJ36TX9');
+    </script>
   </head>
+
   <body>
     <!-- SYSTEM DIAGNOSTIC RECORD #521a. SECURITY TRACE LOG. PARTIAL ACCESS KEY DETECTED. -->
     <!-- FLAG_PART_1: FLAG{4RY4N_S1NGH_ -->
+
     <div id="root"></div>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
-            <!-- Google tag (gtag.js) -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-74LHJ36TX9"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-74LHJ36TX9');
-      </script>
 </html>
