@@ -31,12 +31,12 @@ export const certificationsData = [
   },
   {
     id: 4,
-    title: "AWS Cloud Practitioner",
-    issuer: "Amazon Web Services",
-    date: "2025",
-    status: "Pursuing",
-    image: "/assets/certificates/AWS.webp",
-    credentialLink: "",
+    title: "Cyber Security 101",
+    issuer: "TryHackMe",
+    date: "2026",
+    status: "Completed",
+    image: "/assets/certificates/Cybersec101.png",
+    credentialLink: "https://tryhackme.com/p/aggsijs527",
     color: "#FF9900",
   },
 ];
