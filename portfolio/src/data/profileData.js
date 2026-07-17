@@ -36,9 +36,9 @@ export const profileData = {
   ],
 
   tryhackmeStats: {
-    rank: "Top 05%",        // update with real data
-    rooms: "100+",           // update with real data
-    badges: "18",           // update with real data
-    streak: "44 days",      // update with real data
+    rank: "Top 04%",        // update with real data
+    rooms: "120+",           // update with real data
+    badges: "25+",           // update with real data
+    streak: "55+ days",      // update with real data
   },
 };
