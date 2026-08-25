@@ -9,6 +9,10 @@ on:
       - 'backend/**'
       - 'docker-compose.yml'
       - '.github/workflows/aws-deploy.yml'
+      - '.gitignore'
+      - 'backend/.gitignore'
+
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -23,12 +27,23 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
 
           script: |
+            set -e
+
             cd ~/ANTI-PF
 
-            git pull origin main
+            echo "Fetching latest main..."
+            git fetch origin main
 
+            echo "Resetting EC2 working tree to origin/main..."
+            git reset --hard origin/main
+
+            echo "Rebuilding containers..."
             docker compose up -d --build
 
+            echo "Removing unused Docker images..."
             docker image prune -f
+
+            echo "Checking containers..."
+            docker compose ps
 
             echo "AWS deployment complete"
