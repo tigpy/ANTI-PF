@@ -63,7 +63,50 @@ export const projectsData = [
     architecture: "MERN Stack (MongoDB, Express, React, Node.js) architecture. Follows MVC design patterns. Employs Chart.js for client-side visual analytics and client-state budget alerting services.",
     category: "Web",
     featured: true,
-  }
+  },
+  {
+  id: 4,
+  title: "Evidentia",
+  subtitle: "Evidence-First Security Investigation & SOC Intelligence Platform",
+
+  description:
+    "Evidence-first SOC investigation platform that correlates security telemetry into deterministic incident graphs, reconstructs forensic timelines, verifies evidence integrity with SHA-256, and provides optional local AI-assisted investigation with citation validation.",
+
+  features: [
+    "Deterministic security event correlation and incident formation",
+    "Authoritative evidence graph with causal relationships",
+    "Forensic timeline separating occurred_at and detected_at",
+    "On-demand SHA-256 evidence integrity verification",
+    "MITRE ATT&CK-aware deterministic risk scoring",
+    "Advisory behavioral anomaly and entity similarity analysis",
+    "Optional local Qwen3.5-9B investigation with evidence citations",
+    "SOC replay laboratory for realistic attack scenarios",
+  ],
+
+  techStack: [
+    "React",
+    "TypeScript",
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "NetworkX",
+    "Docker",
+    "Qwen3.5-9B",
+    "llama.cpp",
+  ],
+
+  github: "https://github.com/tigpy/evidentia",
+
+  live: "",
+
+  image: "/assets/project-images/evidentia.png",
+
+  architecture:
+    "Evidence-first SOC architecture that ingests and normalizes telemetry, preserves immutable raw evidence, builds deterministic causal graphs and forensic timelines, calculates explainable risk, and optionally provides analyst-invoked local AI synthesis constrained by deterministic citation validation.",
+
+  category: "Cybersecurity",
+  featured: true,
+}
 ];
 
 export const projectCategories = ["All", "Cybersecurity", "AI", "Web", "Cloud"];
