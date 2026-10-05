@@ -71,7 +71,7 @@ GitHub Repository
 - React
 - Vite
 - JavaScript (ES6+)
-- HTML5
+- HTML
 - CSS3
 - Tailwind CSS
 - Framer Motion
